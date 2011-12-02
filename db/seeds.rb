@@ -8,8 +8,6 @@
 
 User.create(:email => 'test@videogamemerch.com', :password => 'test1234')
 
-GiantBombApi.create(:name => "GiantBomb")
-
 # Create product types
 root = ProductType.create! :name => 'Merch', :rank => 1
   apparel = root.children.create :name => 'T-Shirts and Apparel', :rank => 1

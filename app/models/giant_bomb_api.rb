@@ -12,7 +12,7 @@
 require 'json'
 require 'net/http'
 
-class GiantBombApi < Source
+class GiantBombApi
 
   def self.search_games(query)
     base_url = 'http://api.giantbomb.com/search/'
