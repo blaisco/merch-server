@@ -1,0 +1,7 @@
+<h1><%= @title %></h1>
+
+<%= form_tag(amazon_api_junctions_path) do -%>
+  <p> <%= label_tag 'asins', 'ASINs:' %><br />
+  <%= text_area_tag 'asins', nil, :rows => 10, :cols => 50 %></p>
+  <%= submit_tag_with_image "Add", "/assets/icons/add.png", "positive button" %>
+ <% end -%>

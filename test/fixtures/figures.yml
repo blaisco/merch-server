@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: figures
+#
+#  id                  :integer         not null, primary key
+#  stock_id            :integer
+#  price_cents         :integer
+#  sale_price_cents    :integer
+#  shipping_cost_cents :integer
+#  currency            :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  price_cents: 1
+  sale_price_cents: 1
+  shipping_cost_cents: 1
+  currency: MyString
+
+two:
+  price_cents: 1
+  sale_price_cents: 1
+  shipping_cost_cents: 1
+  currency: MyString

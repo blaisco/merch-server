@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product: 
+  url: MyString
+  url_75px: MyString
+  url_160px: MyString
+  url_500px: MyString
+
+two:
+  product: 
+  url: MyString
+  url_75px: MyString
+  url_160px: MyString
+  url_500px: MyString

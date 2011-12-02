@@ -1,0 +1,6 @@
+<% @root.children.all(:order => :rank).each do |parent| %>
+  <p><b><%= link_to parent.name, parent %></b> <%= link_to "(edit)", edit_product_type_path(parent) if current_user %></p>
+  <% parent.children.all(:order => :rank).each do |cat| %>
+  <p><%= link_to cat.name, cat %> <%= link_to "(edit)", edit_product_type_path(cat) if current_user %></p>
+  <% end %>
+<% end %>

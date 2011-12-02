@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: game_platforms
+#
+#  id          :integer         not null, primary key
+#  game_id     :integer
+#  platform_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+# Indexes
+#
+#  index_game_platforms_on_game_id      (game_id)
+#  index_game_platforms_on_platform_id  (platform_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  game: 
+  platform: 
+
+two:
+  game: 
+  platform: 

@@ -1,0 +1,22 @@
+<%= form.hidden_field :junction_id, :value => @product.junction.id %>
+
+<p><%= form.label :name %><br/>
+<%= form.text_field :name %></p>
+
+<p><%= form.label :description %><br/>
+<%= form.text_area :description, :size => "80x7" %></p>
+
+<p><%= form.label :features_as_text, "Features (one per line)" %><br/>
+<%= form.text_area :features_as_text, :size => "80x12" %></p>
+
+<p><%= form.check_box :officially_licensed %> <%= form.label :officially_licensed %></p>
+
+<p><%= form.label :game_id, "Game" %><br/>
+<%= form.select :game_id, options_for_select(Game.all.map { |game| [game.name, game.id] }, @product.game_id)%></p>
+
+<p><%= form.label :franchise_id, "Franchise" %><br/>
+<%= form.select :franchise_id, options_for_select(Franchise.all.map { |franchise| [franchise.name, franchise.id] }, @product.franchise_id)%></p>
+
+<p><%= form.label :product_type_id, "Product Type" %><br/>
+<%= form.select :product_type_id, options_for_select(ProductType.all.map { |cat| [cat.name, cat.id] }, @product.product_type_id)%><br />
+<%= @product.possible_product_type if @product %></p>

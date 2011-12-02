@@ -1,0 +1,11 @@
+<h1><%= @title %></h1>
+
+<% if @product %>
+  <%= form_for @product do |f| %>
+    <%= errors_for(@product, "We were unable to create that product.") %>
+    <%= render :partial => "form", :object => f %>
+    <%= submit_tag_with_image "Create", "/assets/icons/add.png", "positive button" %>
+  <% end %>
+<% else %>
+  <p>No products to add right now.</p>
+<% end %>

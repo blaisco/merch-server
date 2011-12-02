@@ -1,0 +1,7 @@
+<h1><%= @title %></h1>
+
+<%= form_for @category do |f| %>
+  <%= errors_for(@category, "We were unable to update that product type.") %>
+  <%= render :partial => "form", :object => f %>
+  <%= submit_tag_with_image "Update", "/assets/icons/tick.png", "positive button" %>
+<% end %>

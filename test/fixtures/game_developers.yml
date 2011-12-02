@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: game_developers
+#
+#  id           :integer         not null, primary key
+#  game_id      :integer
+#  developer_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+# Indexes
+#
+#  index_game_developers_on_developer_id  (developer_id)
+#  index_game_developers_on_game_id       (game_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  game: 
+  developer: 
+
+two:
+  game: 
+  developer: 

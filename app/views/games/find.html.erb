@@ -1,0 +1,19 @@
+<%= form_tag(find_games_path, :method => :get) do |f| %>
+  <%= text_field_tag :q, @query %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @result && @result["number_of_total_results"] > 0 %>
+  <% @result["results"].each do |game| %>
+    <% game_str = game["name"] %>
+    <% game_str += " (#{game['original_release_date'].to_date.to_s(:long)})" if game["original_release_date"] %>
+    <% game_date = game['original_release_date'] ? game['original_release_date'].to_date.to_s : nil %>
+    <p><%= link_to game_str, new_game_path({
+      "game[junction_uid]" => game["id"],
+      "game[name]"         => game["name"],
+      "game[release_date]" => game_date
+    }) %></p>
+  <% end %>
+<% elsif @result %>
+  <p>No results were found for your query.</p>
+<% end %>
