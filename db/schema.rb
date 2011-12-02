@@ -76,8 +76,9 @@ ActiveRecord::Schema.define(:version => 20110802003715) do
     t.integer  "franchise_id"
     t.string   "name"
     t.string   "slug"
-    t.integer  "fid"
+    t.string   "aliases"
     t.date     "release_date"
+    t.integer  "fid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

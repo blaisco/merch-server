@@ -1,25 +1,23 @@
 # == Schema Information
 #
-# Table name: styles
+# Table name: variations
 #
 #  id         :integer         not null, primary key
 #  product_id :integer
-#  name       :string(255)
-#  upc        :string(255)
-#  ean        :string(255)
-#  isbn       :string(255)
-#  mpn        :string(255)
+#  size       :string(255)
+#  color      :string(255)
+#  in_stock   :boolean
 #  created_at :datetime
 #  updated_at :datetime
 #
 # Indexes
 #
-#  index_styles_on_product_id  (product_id)
+#  index_variations_on_product_id  (product_id)
 #
 
 class Variation < ActiveRecord::Base
   belongs_to :product
-  has_many :offers
+  has_many :figures
 
   attr_accessible :name, :upc, :ean, :isbn, :mpn
 end

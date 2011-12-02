@@ -8,11 +8,7 @@
     <% game_str = game["name"] %>
     <% game_str += " (#{game['original_release_date'].to_date.to_s(:long)})" if game["original_release_date"] %>
     <% game_date = game['original_release_date'] ? game['original_release_date'].to_date.to_s : nil %>
-    <p><%= link_to game_str, new_game_path({
-      "game[junction_uid]" => game["id"],
-      "game[name]"         => game["name"],
-      "game[release_date]" => game_date
-    }) %></p>
+    <p><%= link_to game_str, add_game_path(game["id"]) %></p>
   <% end %>
 <% elsif @result %>
   <p>No results were found for your query.</p>

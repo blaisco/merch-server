@@ -4,6 +4,7 @@
 #
 #  id         :integer         not null, primary key
 #  name       :string(255)
+#  slug       :string(255)
 #  rank       :decimal(3, 1)
 #  created_at :datetime
 #  updated_at :datetime
@@ -12,6 +13,7 @@
 # Indexes
 #
 #  index_product_types_on_ancestry  (ancestry)
+#  index_product_types_on_slug      (slug) UNIQUE
 #
 
 class ProductType < ActiveRecord::Base

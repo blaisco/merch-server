@@ -4,8 +4,15 @@
 #
 #  id         :integer         not null, primary key
 #  name       :string(255)
+#  slug       :string(255)
+#  fid        :integer
 #  created_at :datetime
 #  updated_at :datetime
+#
+# Indexes
+#
+#  index_platforms_on_fid   (fid) UNIQUE
+#  index_platforms_on_slug  (slug) UNIQUE
 #
 
 class Platform < ActiveRecord::Base

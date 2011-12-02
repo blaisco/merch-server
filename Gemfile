@@ -19,6 +19,6 @@ end
 
 group :development do
   gem 'mongrel',          '~> 1.2.0.pre2'
-  gem 'annotate',         '~> 2.4.0'
+  gem 'annotate',         '~> 2.4.1.beta1'
   gem 'database_cleaner', '~> 0.7.0'
 end

@@ -4,9 +4,10 @@ class CreateGames < ActiveRecord::Migration
       t.references :franchise
       t.string :name
       t.string :slug
-      t.integer :fid
+      t.string :aliases
       t.date :release_date
-
+      t.integer :fid
+      
       t.timestamps
     end
     

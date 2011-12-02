@@ -23,6 +23,7 @@ Merch::Application.routes.draw do
   
   resources :games do
     get 'find', :on => :collection
+    get 'add',  :on => :member
   end
   resources :developers, :genres, :platforms, :products
   resources :categories, :controller => "product_types", :as => "product_types"

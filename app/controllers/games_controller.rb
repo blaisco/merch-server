@@ -20,6 +20,14 @@ class GamesController < ApplicationController
     end
   end
   
+  # Like create, but populating a game based on predefined parameters
+  def add
+    result = GiantBombApi.fetch_game(params[:id])["results"]
+    game = Game.create_or_update_from_hash(result)
+    redirect_to edit_game_path(game), 
+        :notice => "Game was successfully added."
+  end
+  
   def new
     @title = "New game"
     @game = Game.new(params[:game])
@@ -27,14 +35,13 @@ class GamesController < ApplicationController
   
   def create
     @game = Game.new(params[:game])
-    GiantBombApi.populate_game(@game)
+    # GiantBombApi.populate_game(@game)
     
     respond_to do |format|
       if @game.save
-        format.html { redirect_to(find_games_path,
-              :notice => 'Game was successfully created.') }
+        redirect_to(find_games_path, :notice => 'Game was successfully created.')
       else
-        format.html { render :action => "new" }
+        render :action => "new"
       end
     end
   end

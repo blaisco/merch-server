@@ -2,14 +2,13 @@
 #
 # Table name: figures
 #
-#  id                  :integer         not null, primary key
-#  stock_id            :integer
-#  price_cents         :integer
-#  sale_price_cents    :integer
-#  shipping_cost_cents :integer
-#  currency            :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
+#  id                 :integer         not null, primary key
+#  variation_id       :integer
+#  price_cents        :integer
+#  amount_saved_cents :integer
+#  currency           :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 class Figure < ActiveRecord::Base

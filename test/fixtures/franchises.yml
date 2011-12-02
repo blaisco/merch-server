@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: franchises
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  slug       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+# Indexes
+#
+#  index_franchises_on_slug  (slug) UNIQUE
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:

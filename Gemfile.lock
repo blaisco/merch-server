@@ -31,7 +31,7 @@ GEM
       multi_json (~> 1.0)
     ancestry (1.2.4)
       activerecord (>= 2.2.2)
-    annotate (2.4.0)
+    annotate (2.4.1.beta1)
     ansi (1.4.1)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
@@ -136,7 +136,7 @@ PLATFORMS
 
 DEPENDENCIES
   ancestry (~> 1.2.4)
-  annotate (~> 2.4.0)
+  annotate (~> 2.4.1.beta1)
   capistrano (~> 2.9.0)
   database_cleaner (~> 0.7.0)
   devise (~> 1.4.2)
