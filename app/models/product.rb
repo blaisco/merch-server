@@ -26,38 +26,34 @@
 #
 
 class Product < ActiveRecord::Base
+  STATUSES = [
+    'pending',  # new product; needs review
+    'active',   # product displayed to users
+    'inactive'  # product not displayed (ignored)
+  ]
+
   belongs_to :merchandisable, :polymorphic => true
   belongs_to :product_type
   has_many :variations
   has_many :images
   has_one :manufacturer
     
-  attr_accessible :name, :slug, :short_desc, :description
-  attr_accessible :features, :features_as_text, :game_id, :franchise_id
-  attr_accessible :product_type_id
+  attr_accessible :name, :slug, :summary, :description
+  attr_accessible :game_id, :franchise_id, :product_type_id
   
   serialize :features, Array
   
   extend FriendlyId
   friendly_id :name, :use => :slugged
   
-  STATUSES = [
-    'pending',  # new product; needs review
-    'active',   # product displayed to users
-    'inactive'  # product not displayed (ignored)
-  ]
   validates_inclusion_of :status, :in => STATUSES,
             :message => "{{value}} must be in #{STATUSES.join ','}"
+            
+  before_validation :set_pending_status
   
-  def features_as_text()
-    text = ""
-    features.each do |feature|
-      text += feature + "\r\n"
-    end
-    text.chop
-  end
+  private
   
-  def features_as_text=(text)
-    self.features = text.split("\r\n")
+  def set_pending_status
+    self.status ||= 'pending'
   end
 end

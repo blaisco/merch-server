@@ -12,6 +12,7 @@ gem 'ancestry',     '~> 1.2.4'
 gem 'money',        '~> 4.0.1'
 gem 'nokogiri',     '~> 1.5.0'
 gem 'friendly_id',  '~> 4.0.0.beta14'
+# gem 'resque',       '~> 1.19.0'
 
 group :test do
   gem 'turn', :require => false  # Pretty printed test output
