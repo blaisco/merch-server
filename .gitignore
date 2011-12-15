@@ -5,3 +5,4 @@ tmp/
 .sass-cache/
 config/database.yml
 config/settings.yml
+queue/config/consumer.yml

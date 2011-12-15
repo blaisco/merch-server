@@ -14,6 +14,12 @@ Merch::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  
+  namespace :api do
+    resources :products
+  end
+  
+  
   resources :searches, :path => "/search"
   
   namespace :user do

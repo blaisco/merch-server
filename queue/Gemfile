@@ -1,0 +1,6 @@
+source "http://rubygems.org"
+
+gem "amqp", "0.7.0"
+gem "resque", "1.13.0"
+gem "daemon-spawn", "0.4.1"
+gem "mysql2", "0.2.6"

@@ -143,23 +143,25 @@ ActiveRecord::Schema.define(:version => 20110802003715) do
   add_index "product_types", ["slug"], :name => "index_product_types_on_slug", :unique => true
 
   create_table "products", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "franchise_id"
+    t.integer  "merchandisable_id"
+    t.string   "merchandisable_type"
     t.integer  "product_type_id"
     t.integer  "merchant_id"
     t.string   "slug"
     t.string   "name"
     t.string   "url"
-    t.string   "short_desc"
+    t.string   "summary"
     t.text     "description"
-    t.text     "features"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "products", ["game_id"], :name => "index_products_on_game_id"
+  add_index "products", ["merchandisable_type", "merchandisable_id"], :name => "index_products_on_merchandisable_type_and_merchandisable_id"
+  add_index "products", ["merchant_id"], :name => "index_products_on_merchant_id"
   add_index "products", ["product_type_id"], :name => "index_products_on_product_type_id"
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true
+  add_index "products", ["status"], :name => "index_products_on_status"
 
   create_table "searches", :force => true do |t|
     t.string   "query"

@@ -18,6 +18,7 @@
 class Developer < ActiveRecord::Base
   has_many :game_developers, :dependent => :destroy
   has_many :games, :through => :game_developers
+  has_many :products, :as => :merchandisable
   
   attr_accessible :fid, :name, :slug
   
