@@ -17,7 +17,7 @@ module GiantBombApi
   def self.search_games(query)
     base_url = 'http://api.giantbomb.com/search/'
     params = {
-      :api_key => SETTINGS[:giantbomb_api_key],
+      :api_key => Settings.giantbomb_api_key,
       :format => 'json',
       :resources => 'game',
       :query => query,
@@ -29,7 +29,7 @@ module GiantBombApi
   def self.fetch_game(fid)
     base_url = 'http://api.giantbomb.com/game/' + fid + '/'
     params = {
-      :api_key => SETTINGS[:giantbomb_api_key],
+      :api_key => Settings.giantbomb_api_key,
       :format => 'json',
       :field_list => 'id,name,aliases,platforms,genres,developers,date_last_updated,original_release_date'
     }

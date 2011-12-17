@@ -8,6 +8,7 @@ development:
     schema_search_path: public
     encoding: utf8
     template: template0
+    min_messages: warning # Silence PostgreSQL's NOTICE messages for indexes
 
 test:
     adapter: postgresql
@@ -19,6 +20,7 @@ test:
     schema_search_path: public
     encoding: utf8
     template: template0
+    min_messages: warning # Silence PostgreSQL's NOTICE messages for indexes
 
 production:
     adapter: postgresql

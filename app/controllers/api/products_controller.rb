@@ -14,12 +14,14 @@ class Api::ProductsController < ApplicationController
     #~ Resque.enqueue(ProductJob, object)
     
     render_json_message false
+  rescue
+    render_json_message true, "Invalid message."
   end
   
   private
   
   def validate_key
-    raise unless params[:key] == SETTINGS[:api_key]
+    raise unless params[:key] == Settings.api_key
   rescue
     render_json_message true, "Invalid key."
   end

@@ -12,6 +12,7 @@ gem 'ancestry',     '~> 1.2.4'
 gem 'money',        '~> 4.0.1'
 gem 'nokogiri',     '~> 1.5.0'
 gem 'friendly_id',  '~> 4.0.0.beta14'
+gem 'rails_config', '~> 0.2.5'
 # gem 'resque',       '~> 1.19.0'
 
 group :test do
@@ -22,4 +23,13 @@ group :development do
   gem 'mongrel',          '~> 1.2.0.pre2'
   gem 'annotate',         '~> 2.4.1.beta1'
   gem 'database_cleaner', '~> 0.7.0'
+end
+
+group :development, :test do
+  # gem 'mocha',              '~> 0.9.12'
+  # gem 'autotest-rails',     '~> 4.1.0'
+  gem 'shoulda',            '~> 2.11.3'
+  gem 'factory_girl_rails', '~> 1.0.1'
+  gem 'minitest',           '~> 2.9.1'
+  
 end
