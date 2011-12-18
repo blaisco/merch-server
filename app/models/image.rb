@@ -2,14 +2,14 @@
 #
 # Table name: images
 #
-#  id         :integer         not null, primary key
-#  product_id :integer
-#  url        :string(255)
-#  url_75px   :string(255)
-#  url_160px  :string(255)
-#  url_500px  :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer         not null, primary key
+#  product_id   :integer
+#  size         :string(255)
+#  original_url :string(255)
+#  path         :string(255)
+#  hash         :string(40)
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 # Indexes
 #

@@ -2,10 +2,10 @@ class CreateImages < ActiveRecord::Migration
   def change
     create_table :images do |t|
       t.references :product
-      t.string :url
-      t.string :url_75px
-      t.string :url_160px
-      t.string :url_500px
+      t.string :size
+      t.string :original_url
+      t.string :path
+      t.string :hash, :limit => 40
 
       t.timestamps
     end

@@ -13,11 +13,14 @@
 #  summary             :string(255)
 #  description         :text
 #  status              :string(255)
+#  hash                :string(40)
+#  hash_changed_at     :datetime
 #  created_at          :datetime
 #  updated_at          :datetime
 #
 # Indexes
 #
+#  index_products_on_hash                                       (hash)
 #  index_products_on_merchandisable_type_and_merchandisable_id  (merchandisable_type,merchandisable_id)
 #  index_products_on_merchant_id                                (merchant_id)
 #  index_products_on_product_type_id                            (product_type_id)
@@ -34,8 +37,8 @@ class Product < ActiveRecord::Base
 
   belongs_to :merchandisable, :polymorphic => true
   belongs_to :product_type
-  has_many :variations
-  has_many :images
+  has_many :variations, :dependent => :destroy
+  has_many :images, :dependent => :destroy
   has_one :manufacturer
     
   attr_accessible :name, :slug, :summary, :description

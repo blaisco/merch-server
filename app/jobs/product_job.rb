@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class ProductJob
   @queue = :products
   
@@ -10,10 +12,11 @@ class ProductJob
     #~ \"summary\": \"This strictly limited collector\\u0092s [snip].\", 
     #~ \"inventory\": [
       #~ {
+        #~ \"amount_saved\": \"500\", 
         #~ \"color\": null, 
-        #~ \"sale_price\": \"$24.99\", 
-        #~ \"price\": \"$29.99\", 
+        #~ \"currency\": \"USD\",
         #~ \"in_stock\": true, 
+        #~ \"price\": \"2499\", 
         #~ \"size\": null
       #~ }
     #~ ],
@@ -30,10 +33,16 @@ class ProductJob
 
   def self.perform(object)
     product = Product.find_or_initialize_by_url(object["url"])
-    unless product.status == 'inactive' # active or pending
-      product = create_product(product, object)
-      product = create_inventory(product, object["inventory"])
-      product = create_images(product, object["images"])
+    if product.status != 'inactive' # active or pending products
+      hash = Digest::SHA1.hexdigest(object.to_s)
+      if product.hash.nil? or product.hash != hash # new product or product changed
+        product.hash = hash
+        product.hash_changed_at = Time.now
+        product = create_product(product, object)
+        product = create_inventory(product, object["inventory"])
+        product = create_images(product, object["images"])
+      end
+      product.updated_at = Time.now
       product.save
     end
   end
@@ -44,13 +53,12 @@ class ProductJob
     product.description = object["description"]
     # Mark as updated even if no changes; I want to know when a product is
     # stale (i.e. no one is trying to update it).
-    product.updated_at = Time.now
     product
   end
   
   def self.create_inventory(product, object)
     object.each do |inv|
-      
+ 
     end
     product
   end

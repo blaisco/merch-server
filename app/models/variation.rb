@@ -17,7 +17,8 @@
 
 class Variation < ActiveRecord::Base
   belongs_to :product
-  has_many :figures
+  # has_many :figures, :dependent => :destroy
+  has_one :figure, :dependent => :destroy
 
   attr_accessible :name, :upc, :ean, :isbn, :mpn
 end
