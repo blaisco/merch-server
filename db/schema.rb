@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20110802003715) do
     t.string   "size"
     t.string   "original_url"
     t.string   "path"
-    t.string   "hash",         :limit => 40
+    t.string   "hash_value",   :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -153,13 +153,13 @@ ActiveRecord::Schema.define(:version => 20110802003715) do
     t.string   "summary"
     t.text     "description"
     t.string   "status"
-    t.string   "hash",                :limit => 40
+    t.string   "hash_value",          :limit => 40
     t.datetime "hash_changed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "products", ["hash"], :name => "index_products_on_hash"
+  add_index "products", ["hash_value"], :name => "index_products_on_hash_value"
   add_index "products", ["merchandisable_type", "merchandisable_id"], :name => "index_products_on_merchandisable_type_and_merchandisable_id"
   add_index "products", ["merchant_id"], :name => "index_products_on_merchant_id"
   add_index "products", ["product_type_id"], :name => "index_products_on_product_type_id"

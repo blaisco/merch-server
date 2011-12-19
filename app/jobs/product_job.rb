@@ -35,8 +35,8 @@ class ProductJob
     product = Product.find_or_initialize_by_url(object["url"])
     if product.status != 'inactive' # active or pending products
       hash = Digest::SHA1.hexdigest(object.to_s)
-      if product.hash.nil? or product.hash != hash # new product or product changed
-        product.hash = hash
+      if product.hash_value.nil? or product.hash_value != hash # new product or product changed
+        product.hash_value = hash
         product.hash_changed_at = Time.now
         product = create_product(product, object)
         product = create_inventory(product, object["inventory"])
@@ -57,9 +57,20 @@ class ProductJob
   end
   
   def self.create_inventory(product, object)
+    # Kind of a hack. Rather than check each variation for changes, we just delete all of them.
+    product.variations.destroy_all unless product.new_record?
+    
     object.each do |inv|
- 
+      var = product.variations.build
+      var.size = inv['size']
+      var.color = inv['color']
+      var.in_stock = inv['in_stock']
+      fig = var.build_figure
+      fig.currency = inv['currency']
+      fig.price_cents = inv['price'].to_i
+      fig.amount_saved_cents = inv['amount_saved'].to_i
     end
+    
     product
   end
   

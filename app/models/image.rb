@@ -7,7 +7,7 @@
 #  size         :string(255)
 #  original_url :string(255)
 #  path         :string(255)
-#  hash         :string(40)
+#  hash_value   :string(40)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

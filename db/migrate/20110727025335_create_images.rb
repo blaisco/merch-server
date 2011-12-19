@@ -5,7 +5,7 @@ class CreateImages < ActiveRecord::Migration
       t.string :size
       t.string :original_url
       t.string :path
-      t.string :hash, :limit => 40
+      t.string :hash_value, :limit => 40
 
       t.timestamps
     end
