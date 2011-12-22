@@ -19,6 +19,8 @@
 class ProductType < ActiveRecord::Base
   has_ancestry
   
+  has_many :products, :through => :typification, :dependent => :destroy
+  
   attr_accessible :name, :slug, :rank, :parent_id
   
   extend FriendlyId

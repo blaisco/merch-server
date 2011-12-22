@@ -5,7 +5,6 @@
 #  id                  :integer         not null, primary key
 #  merchandisable_id   :integer
 #  merchandisable_type :string(255)
-#  product_type_id     :integer
 #  merchant_id         :integer
 #  slug                :string(255)
 #  name                :string(255)
@@ -23,7 +22,6 @@
 #  index_products_on_checksum                                   (checksum)
 #  index_products_on_merchandisable_type_and_merchandisable_id  (merchandisable_type,merchandisable_id)
 #  index_products_on_merchant_id                                (merchant_id)
-#  index_products_on_product_type_id                            (product_type_id)
 #  index_products_on_slug                                       (slug) UNIQUE
 #  index_products_on_status                                     (status)
 #
@@ -36,13 +34,10 @@ class Product < ActiveRecord::Base
   ]
 
   belongs_to :merchandisable, :polymorphic => true
-  belongs_to :product_type
+  has_many :product_types, :through => :typification, :dependent => :destroy
+  belongs_to :merchant
   has_many :variations, :dependent => :destroy
   has_many :images, :dependent => :destroy
-  has_one :manufacturer
-    
-  attr_accessible :name, :slug, :summary, :description
-  attr_accessible :game_id, :franchise_id, :product_type_id
   
   serialize :features, Array
   

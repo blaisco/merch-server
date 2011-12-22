@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111222012127) do
+ActiveRecord::Schema.define(:version => 20111222185724) do
 
   create_table "developers", :force => true do |t|
     t.string   "name"
@@ -148,7 +148,6 @@ ActiveRecord::Schema.define(:version => 20111222012127) do
   create_table "products", :force => true do |t|
     t.integer  "merchandisable_id"
     t.string   "merchandisable_type"
-    t.integer  "product_type_id"
     t.integer  "merchant_id"
     t.string   "slug"
     t.string   "name"
@@ -165,7 +164,6 @@ ActiveRecord::Schema.define(:version => 20111222012127) do
   add_index "products", ["checksum"], :name => "index_products_on_checksum"
   add_index "products", ["merchandisable_type", "merchandisable_id"], :name => "index_products_on_merchandisable_type_and_merchandisable_id"
   add_index "products", ["merchant_id"], :name => "index_products_on_merchant_id"
-  add_index "products", ["product_type_id"], :name => "index_products_on_product_type_id"
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true
   add_index "products", ["status"], :name => "index_products_on_status"
 
@@ -176,6 +174,16 @@ ActiveRecord::Schema.define(:version => 20111222012127) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "typifications", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "product_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "typifications", ["product_id"], :name => "index_typifications_on_product_id"
+  add_index "typifications", ["product_type_id"], :name => "index_typifications_on_product_type_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                              :default => "", :null => false
@@ -200,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20111222012127) do
     t.integer  "product_id"
     t.string   "size"
     t.string   "color"
+    t.string   "style"
     t.boolean  "in_stock"
     t.datetime "created_at"
     t.datetime "updated_at"

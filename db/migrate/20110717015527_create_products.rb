@@ -2,7 +2,6 @@ class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
       t.references :merchandisable, :polymorphic => true
-      t.references :product_type
       t.references :merchant
       t.string :slug
       t.string :name
@@ -17,7 +16,6 @@ class CreateProducts < ActiveRecord::Migration
     end
     add_index :products, :slug, :unique => true
     add_index :products, [ :merchandisable_type, :merchandisable_id]
-    add_index :products, :product_type_id
     add_index :products, :merchant_id
     add_index :products, :status
     add_index :products, :checksum

@@ -1,1 +1,17 @@
-<h1><%= @title %></h1>
+<div class="grid_8">
+  <div id="breadcrumb"><%= breadcrumb(@product.product_type) %></div>
+  <h1><%= @title %></h1>
+  <div id="item-image">
+    <% if @product.images.blank? %>
+      <%# TODO: Get a default image_tag for a no-image image %>
+      <%= image_tag nil %>
+    <% else %>
+      <%= image_tag @product.images.first.data.url %>
+    <% end %>
+  </div>
+  <div id="item-summary"><%= @product.summary %></div>
+</div>
+<div class="grid_4">
+  
+</div>
+<div class="clear"></div>

@@ -5,6 +5,7 @@ class ProductJob
   # @queue = :products
   
   #~ "{
+    #~ \"merchant_url\": \"http://store.valvesoftware.com/\", 
     #~ \"name\": \"Portal 2 Collectors Edition Guide\", 
     #~ \"url\": \"http://store.valvesoftware.com/product.php?i=P0909\", 
     #~ \"image_urls\": [
@@ -43,6 +44,8 @@ class ProductJob
         product = create_inventory(product, object["inventory"])
         product = create_images(product, object["images"])
       end
+      # Mark as updated even if no changes; I want to know when a product is
+      # stale (i.e. no one is trying to update it).
       product.updated_at = Time.now
       product.save
     end
@@ -54,8 +57,9 @@ class ProductJob
     product.name = object["name"]
     product.summary = object["summary"]
     product.description = object["description"]
-    # Mark as updated even if no changes; I want to know when a product is
-    # stale (i.e. no one is trying to update it).
+    product.merchant = Merchant.find_or_initialize_by_url(
+      :url => object["merchant_url"], :name => object["merchant_url"]
+    )
     product
   end
   

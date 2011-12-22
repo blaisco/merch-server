@@ -2,8 +2,9 @@ class CreateVariations < ActiveRecord::Migration
   def change
     create_table :variations do |t|
       t.references :product
-      t.string :size # size is a reserved word in ruby
+      t.string :size
       t.string :color
+      t.string :style
       t.boolean :in_stock
 
       t.timestamps

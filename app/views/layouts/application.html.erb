@@ -2,24 +2,30 @@
 <html>
 <head>
   <title><%= @title ? (@title + " | " + "Video Game Merch") : "Video Game Merch" %></title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="container_12">
-    <div class="grid_12">
-    
-      <div id="message_center">
-        <%= raw "<div class='notice'>#{notice}</div>" if notice %>
-        <%= raw "<div class='notice'>#{alert}</div>" if alert %>
-      </div>
-    
-      <%= yield %>
-    
+    <div id="header" class="grid_12">
+      Video Game Merch
     </div>
-    <!-- end .grid_12 -->
+    
+    <div id="message_center" class="grid_12">
+      <%= raw "<div class='notice'>#{notice}</div>" if notice %>
+      <%= raw "<div class='notice'>#{alert}</div>" if alert %>
+    </div>
+    <div class="clear"></div>
+  
+    <div id="main">
+      <%= yield %>
+    </div>
+    
+    <div id="footer" class="grid_12">
+      Footer
+    </div>
+
   </div>
-  <!-- end .container_12 -->
+  <%= javascript_include_tag "application" %>
 </body>
 </html>

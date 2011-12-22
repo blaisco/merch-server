@@ -6,6 +6,7 @@
 #  product_id :integer
 #  size       :string(255)
 #  color      :string(255)
+#  style      :string(255)
 #  in_stock   :boolean
 #  created_at :datetime
 #  updated_at :datetime
