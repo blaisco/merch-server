@@ -10,8 +10,8 @@ class CreateProducts < ActiveRecord::Migration
       t.string :summary
       t.text :description
       t.string :status
-      t.string :hash_value, :limit => 40
-      t.datetime :hash_changed_at
+      t.string :checksum, :limit => 40
+      t.datetime :checksum_changed_at
 
       t.timestamps
     end
@@ -20,6 +20,6 @@ class CreateProducts < ActiveRecord::Migration
     add_index :products, :product_type_id
     add_index :products, :merchant_id
     add_index :products, :status
-    add_index :products, :hash_value
+    add_index :products, :checksum
   end
 end

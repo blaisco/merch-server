@@ -13,6 +13,7 @@ gem 'money',        '~> 4.0.1'
 gem 'nokogiri',     '~> 1.5.0'
 gem 'friendly_id',  '~> 4.0.0.beta14'
 gem 'rails_config', '~> 0.2.5'
+gem 'paperclip',    '~> 2.4.5'
 # gem 'resque',       '~> 1.19.0'
 
 group :test do

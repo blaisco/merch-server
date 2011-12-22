@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110802003715) do
+ActiveRecord::Schema.define(:version => 20111222012127) do
 
   create_table "developers", :force => true do |t|
     t.string   "name"
@@ -99,14 +99,17 @@ ActiveRecord::Schema.define(:version => 20110802003715) do
 
   create_table "images", :force => true do |t|
     t.integer  "product_id"
-    t.string   "size"
     t.string   "original_url"
-    t.string   "path"
-    t.string   "hash_value",   :limit => 40
+    t.string   "checksum",          :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
   end
 
+  add_index "images", ["checksum"], :name => "index_images_on_checksum"
   add_index "images", ["product_id"], :name => "index_images_on_product_id"
 
   create_table "merchants", :force => true do |t|
@@ -153,13 +156,13 @@ ActiveRecord::Schema.define(:version => 20110802003715) do
     t.string   "summary"
     t.text     "description"
     t.string   "status"
-    t.string   "hash_value",          :limit => 40
-    t.datetime "hash_changed_at"
+    t.string   "checksum",            :limit => 40
+    t.datetime "checksum_changed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "products", ["hash_value"], :name => "index_products_on_hash_value"
+  add_index "products", ["checksum"], :name => "index_products_on_checksum"
   add_index "products", ["merchandisable_type", "merchandisable_id"], :name => "index_products_on_merchandisable_type_and_merchandisable_id"
   add_index "products", ["merchant_id"], :name => "index_products_on_merchant_id"
   add_index "products", ["product_type_id"], :name => "index_products_on_product_type_id"

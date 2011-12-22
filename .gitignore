@@ -6,3 +6,4 @@ tmp/
 config/database.yml
 config/settings.yml
 queue/config/consumer.yml
+public/system
