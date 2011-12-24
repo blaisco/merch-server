@@ -6,29 +6,39 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="topbar" data-dropdown="dropdown">
+    <div class="topbar-inner">
+      <div class="container">
+        <h3><a href="/">Video Game Merch</a></h3>
+        <ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+          <!--<li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>-->
+        </ul>
+        <form class="pull-right" action="">
+          <input type="text" placeholder="Search">
+        </form>
+      </div>
+    </div><!-- /topbar-inner -->
+  </div>
   <div class="container">
-  <div class="row">
-    <div id="header" class="span16">
-      Video Game Merch
+    <div class="row">
+      <div id="message-center" class="span16">
+        <%= raw "<div class='notice'>#{notice}</div>" if notice %>
+        <%= raw "<div class='notice'>#{alert}</div>" if alert %>
+      </div>
     </div>
-  </div>
-  
-  <div class="row">
-    <div id="message-center" class="span16">
-      <%= raw "<div class='notice'>#{notice}</div>" if notice %>
-      <%= raw "<div class='notice'>#{alert}</div>" if alert %>
-    </div>
-  </div>
 
-  <div id="main">
-    <%= yield %>
-  </div>
-  
-  <div class="row">
-    <div id="footer" class="span16">
-      Footer
+    <div id="main">
+      <%= yield %>
     </div>
-  </div>
+    
+    <div class="row">
+      <footer>
+        Footer
+      </footer>
+    </div>
   </div>
 
   <%= javascript_include_tag "application" %>
