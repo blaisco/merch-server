@@ -19,7 +19,6 @@ Merch::Application.routes.draw do
     resources :products
   end
   
-  
   resources :searches, :path => "/search"
   
   namespace :user do
@@ -31,7 +30,7 @@ Merch::Application.routes.draw do
     get 'find', :on => :collection
     get 'add',  :on => :member
   end
-  resources :developers, :genres, :platforms, :products
+  resources :developers, :genres, :platforms, :products, :merchants
   resources :categories, :controller => "product_types", :as => "product_types"
   
   resource :amazon_api do

@@ -28,7 +28,28 @@
   </div>
   
   <div class="span5">
-    <div class="item-price"><%= price(@product) %></div>
-    <a href="<%= @product.url %>" class="btn large primary">Check it out</a>
+    <div class="item-price">
+      <div class="item-amount"><%= price(@product) %></div>
+      <div class="item-actions"><a href="<%= @product.url %>" class="btn large success">Check it out &raquo;</a></div>
+    </div>
+    
+    <div class="sidebar">
+      <%# Merchant sidebar %>
+      <div class="sidebar-inner">
+        <h4>Sold by <%= link_to @product.merchant.name, @product.merchant %></h4>
+      </div>
+      
+      <%# Game/Franchise sidebar %>
+      <% unless @product.merchandisable.nil? %>
+      <div class="sidebar-inner">
+        <h4>Other <%= link_to @product.merchandisable.name, @product.merchandisable %> merch</h4>
+      </div>
+      <% end %>
+      
+      <%# Product type(s) sidebar%>
+      <div class="sidebar-inner">
+      
+      </div>
+    </div>
   </div>
 </div>
