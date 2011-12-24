@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20111222185724) do
 
   create_table "figures", :force => true do |t|
     t.integer  "variation_id"
-    t.integer  "price_cents"
-    t.integer  "amount_saved_cents"
+    t.integer  "price_in_cents"
+    t.integer  "amount_saved_in_cents"
     t.string   "currency"
     t.datetime "created_at"
     t.datetime "updated_at"

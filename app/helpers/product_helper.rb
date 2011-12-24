@@ -12,4 +12,13 @@ module ProductHelper
     html << link_to(category.name, category, :class => "nodename current")
     html.html_safe
   end
+  
+  def price(product)
+    if product.price_range?
+      product.min_figure.price.format + "-" + product.max_figure.price.format 
+            + " " + product.max_figure.currency
+    else
+      product.max_figure.price.format + " " + product.max_figure.currency
+    end
+  end
 end

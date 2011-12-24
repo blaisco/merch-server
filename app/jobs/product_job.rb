@@ -75,8 +75,8 @@ class ProductJob
       var.in_stock = inv['in_stock']
       fig = var.build_figure
       fig.currency = inv['currency']
-      fig.price_cents = inv['price'].to_i
-      fig.amount_saved_cents = inv['amount_saved'].to_i
+      fig.price_in_cents = inv['price'].to_i
+      fig.amount_saved_in_cents = inv['amount_saved'].to_i
     end
     
     product
@@ -99,6 +99,8 @@ class ProductJob
         path = IMAGES_STORE + img["path"]
         if File.exists? path
           image.data = File.new(path,'r')
+        else
+          puts "Unable to find image at " + path
         end
       end
     end

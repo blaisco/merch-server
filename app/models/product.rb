@@ -37,6 +37,7 @@ class Product < ActiveRecord::Base
   has_many :product_types, :through => :typification, :dependent => :destroy
   belongs_to :merchant
   has_many :variations, :dependent => :destroy
+  has_many :figures, :through => :variations
   has_many :images, :dependent => :destroy
   
   serialize :features, Array
@@ -48,6 +49,18 @@ class Product < ActiveRecord::Base
             :message => "{{value}} must be in #{STATUSES.join ','}"
             
   before_validation :set_pending_status
+
+  def price_range?
+    min_figure.price_in_cents != max_figure.price_in_cents
+  end
+  
+  def min_figure
+    @min_figure ||= figures.order('price_in_cents ASC').first
+  end
+  
+  def max_figure
+    @max_figure ||= figures.order('price_in_cents DESC').first 
+  end
   
   private
   

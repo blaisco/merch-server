@@ -6,26 +6,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container_12">
-    <div id="header" class="grid_12">
+  <div class="container">
+  <div class="row">
+    <div id="header" class="span16">
       Video Game Merch
     </div>
-    
-    <div id="message_center" class="grid_12">
+  </div>
+  
+  <div class="row">
+    <div id="message-center" class="span16">
       <%= raw "<div class='notice'>#{notice}</div>" if notice %>
       <%= raw "<div class='notice'>#{alert}</div>" if alert %>
     </div>
-    <div class="clear"></div>
+  </div>
+
+  <div id="main">
+    <%= yield %>
+  </div>
   
-    <div id="main">
-      <%= yield %>
-    </div>
-    
-    <div id="footer" class="grid_12">
+  <div class="row">
+    <div id="footer" class="span16">
       Footer
     </div>
-
   </div>
+  </div>
+
   <%= javascript_include_tag "application" %>
 </body>
 </html>
