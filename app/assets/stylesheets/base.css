@@ -14,8 +14,18 @@ body {
   border-top: 1px solid #eee;
 }
 
+/********* CHECKBOXES **********/
 
-/********* GENERAL **********/
+.input input[type="checkbox"] {
+  vertical-align: bottom;
+}
+
+.input label {
+  padding-top: 0;
+  float: none;
+}
+
+/********* PRODUCT MAIN **********/
 
 #item-image {
   display: block;
@@ -44,7 +54,15 @@ body {
 
 #item-thumbs img {
   border: 1px solid #EEE;
+  display: block;
 }
+
+#item-summary {
+  margin-bottom: 20px;
+}
+
+/********* PRODUCT SIDEBAR **********/
+
 
 .item-price {
   margin-bottom: 20px;
@@ -59,4 +77,14 @@ body {
   background-color: #EEE;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+.other-items {
+  background-color: #FFF;
+  padding: 5px;
+}
+
+.other-items img {
+  border: 1px solid #EEE;
+  display: block;
 }

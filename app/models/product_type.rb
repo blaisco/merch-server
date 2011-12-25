@@ -19,7 +19,8 @@
 class ProductType < ActiveRecord::Base
   has_ancestry
   
-  has_many :products, :through => :typification, :dependent => :destroy
+  has_many :typifications
+  has_many :products, :through => :typifications, :dependent => :destroy
   
   attr_accessible :name, :slug, :rank, :parent_id
   

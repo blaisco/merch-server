@@ -19,9 +19,13 @@
             <% end %>
           <% end %>
         </div>
-        <div class="clear"></div>
+        
         <div class="row">
           <div id="item-summary" class="span9"><%= @product.summary %></div>
+        </div>
+        
+        <div class="row">
+          <div id="item-summary" class="span11">[insert Facebook comments here]</div>
         </div>
       </div>
     </div>
@@ -37,6 +41,11 @@
       <%# Merchant sidebar %>
       <div class="sidebar-inner">
         <h4>Sold by <%= link_to @product.merchant.name, @product.merchant %></h4>
+        <div class="other-items">
+          <% @product.merchant.products.limit(3).each do |product| %>
+            <%= image_tag product.images.first.data.url(:thumb) %>
+          <% end %>
+        </div>
       </div>
       
       <%# Game/Franchise sidebar %>
@@ -47,9 +56,13 @@
       <% end %>
       
       <%# Product type(s) sidebar%>
-      <div class="sidebar-inner">
-      
-      </div>
+      <% unless @product.product_types.blank? %>
+        <div class="sidebar-inner">
+          <% @product.product_types.each do |type| %>
+            <%= link_to type.name, type %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

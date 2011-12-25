@@ -16,6 +16,7 @@
 
 class Merchant < ActiveRecord::Base
   has_many :products
+  # has_many :products, :as => :merchandisable
   
   attr_accessible :name, :slug, :url
   

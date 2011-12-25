@@ -34,7 +34,8 @@ class Product < ActiveRecord::Base
   ]
 
   belongs_to :merchandisable, :polymorphic => true
-  has_many :product_types, :through => :typification, :dependent => :destroy
+  has_many :typifications
+  has_many :product_types, :through => :typifications, :dependent => :destroy
   belongs_to :merchant
   has_many :variations, :dependent => :destroy
   has_many :figures, :through => :variations
