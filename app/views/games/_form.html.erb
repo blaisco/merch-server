@@ -1,11 +1,35 @@
-<p><%= form.label :name %><br/>
-<%= form.text_field :name %></p>
+<fieldset>
+  <div class="clearfix">
+    <%= form.label :name %>
+    <div class="input">
+      <%= form.text_field :name %>
+    </div>
+  </div>
 
-<p><%= form.label :aliases %><br/>
-<%= form.text_field :aliases %></p>
+  <div class="clearfix">
+  <%= form.label :aliases %>
+  <div class="input">
+    <%= form.text_field :aliases %>
+    </div>
+  </div>
 
-<p><%= form.label :release_date %><br/>
-<%= form.text_field :release_date %></p>
+  <div class="clearfix">
+  <%= form.label :release_date %>
+  <div class="input">
+    <%= form.text_field :release_date %>
+    </div>
+  </div>
 
-<p><%= form.label :franchise_name, "Franchise" %><br/>
-<%= form.text_field :franchise_name %></p>
+  <div class="clearfix">
+  <%= form.label :franchise_name, "Franchise" %>
+  <div class="input">
+    <%= form.text_field :franchise_name %>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit @game.persisted? ? "Update Game" : "Create Game", :class => "primary btn" %>
+  </div>
+</fieldset>
+
+

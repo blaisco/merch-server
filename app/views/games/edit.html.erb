@@ -1,7 +1,9 @@
-<h1><%= @title %></h1>
+<div class="page-header">
+  <h1><%= @title %></h1>
+</div>
 
 <%= form_for @game do |f| %>
   <%= errors_for(@game) %>
-  <%= render :partial => "form", :object => f %>
-  <%= submit_tag "Update" %>
+    <%= render :partial => "form", :object => f %>
+  </fieldset>
 <% end %>

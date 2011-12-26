@@ -1,15 +1,30 @@
+<div class="page-header">
+  <h1>Find games</h1>
+</div>
+
 <%= form_tag(find_games_path, :method => :get) do |f| %>
   <%= text_field_tag :q, @query %>
-  <%= submit_tag "Search", :name => nil %>
+  <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
 <% end %>
 
 <% if @result && @result["number_of_total_results"] > 0 %>
-  <% @result["results"].each do |game| %>
-    <% game_str = game["name"] %>
-    <% game_str += " (#{game['original_release_date'].to_date.to_s(:long)})" if game["original_release_date"] %>
-    <% game_date = game['original_release_date'] ? game['original_release_date'].to_date.to_s : nil %>
-    <p><%= link_to game_str, add_game_path(game["id"]) %></p>
-  <% end %>
+  <table class="condensed-table zebra-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @result["results"].each do |game| %>
+      <tr>
+        <td><%= link_to game["name"], add_game_path(game["id"]) %></td>
+        <td><%= game['original_release_date'].to_date.to_s(:long) if game["original_release_date"] %></td>
+      </tr>
+      <p></p>
+    <% end %>
+    </tbody>
+  </table>
 <% elsif @result %>
   <p>No results were found for your query.</p>
 <% end %>

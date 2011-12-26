@@ -11,11 +11,16 @@
       <div class="container">
         <h3><a href="/">Video Game Merch</a></h3>
         <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <!--<li><a href="#">Link</a></li>
+          <li><a href="#">Home</a></li>
+          <!--<li class="active"><a href="#">Link</a></li>
           <li><a href="#">Link</a></li>
           <li><a href="#">Link</a></li>-->
         </ul>
+        <% if user_signed_in? %>
+          <ul class="nav secondary-nav">
+            <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+          </ul>
+        <% end %>
         <form class="pull-right" action="">
           <input type="text" placeholder="Search" class="span4">
         </form>
@@ -23,10 +28,21 @@
     </div><!-- /topbar-inner -->
   </div>
   <div class="container">
+
     <div class="row">
-      <div id="message-center" class="span16">
-        <%= raw "<div class='notice'>#{notice}</div>" if notice %>
-        <%= raw "<div class='notice'>#{alert}</div>" if alert %>
+      <div class="span16">
+        <% if notice %>
+        <div class="alert-message success">
+          <a class="close" href="#">×</a>
+          <p><%= notice %></p>
+        </div>
+        <% end %>
+        <% if alert %>
+        <div class="alert-message error">
+          <a class="close" href="#">×</a>
+          <p><%= alert %></p>
+        </div>
+        <% end %>
       </div>
     </div>
 
@@ -41,6 +57,7 @@
     </div>
   </div>
 
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
   <%= javascript_include_tag "application" %>
 </body>
 </html>

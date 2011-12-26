@@ -36,10 +36,12 @@ ActiveRecord::Schema.define(:version => 20111222185724) do
   create_table "franchises", :force => true do |t|
     t.string   "name"
     t.string   "slug"
+    t.integer  "fid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "franchises", ["fid"], :name => "index_franchises_on_fid", :unique => true
   add_index "franchises", ["slug"], :name => "index_franchises_on_slug", :unique => true
 
   create_table "game_developers", :force => true do |t|
@@ -51,6 +53,16 @@ ActiveRecord::Schema.define(:version => 20111222185724) do
 
   add_index "game_developers", ["developer_id"], :name => "index_game_developers_on_developer_id"
   add_index "game_developers", ["game_id"], :name => "index_game_developers_on_game_id"
+
+  create_table "game_franchises", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "franchise_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "game_franchises", ["franchise_id"], :name => "index_game_franchises_on_franchise_id"
+  add_index "game_franchises", ["game_id"], :name => "index_game_franchises_on_game_id"
 
   create_table "game_genres", :force => true do |t|
     t.integer  "game_id"

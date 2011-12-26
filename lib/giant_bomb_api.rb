@@ -31,7 +31,7 @@ module GiantBombApi
     params = {
       :api_key => Settings.giantbomb_api_key,
       :format => 'json',
-      :field_list => 'id,name,aliases,platforms,genres,developers,date_last_updated,original_release_date'
+      :field_list => 'id,name,aliases,franchises,platforms,genres,developers,date_last_updated,original_release_date'
     }
     result = make_request(base_url, params)
   end
