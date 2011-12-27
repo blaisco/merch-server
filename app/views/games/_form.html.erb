@@ -1,3 +1,5 @@
+<%= errors_for(@game) %>
+
 <fieldset>
   <div class="clearfix">
     <%= form.label :name %>
@@ -17,13 +19,6 @@
   <%= form.label :release_date %>
   <div class="input">
     <%= form.text_field :release_date %>
-    </div>
-  </div>
-
-  <div class="clearfix">
-  <%= form.label :franchise_name, "Franchise" %>
-  <div class="input">
-    <%= form.text_field :franchise_name %>
     </div>
   </div>
   

@@ -21,7 +21,6 @@
         <td><%= link_to game["name"], add_game_path(game["id"]) %></td>
         <td><%= game['original_release_date'].to_date.to_s(:long) if game["original_release_date"] %></td>
       </tr>
-      <p></p>
     <% end %>
     </tbody>
   </table>

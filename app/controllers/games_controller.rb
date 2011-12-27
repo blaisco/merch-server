@@ -35,7 +35,6 @@ class GamesController < ApplicationController
   
   def create
     @game = Game.new(params[:game])
-    # GiantBombApi.populate_game(@game)
     
     respond_to do |format|
       if @game.save

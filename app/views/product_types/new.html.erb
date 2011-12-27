@@ -1,7 +1,7 @@
-<h1><%= @title %></h1>
+<div class="page-header">
+  <h1><%= @title %></h1>
+</div>
 
 <%= form_for @category do |f| %>
-  <%= errors_for(@category, "We were unable to create that product type.") %>
   <%= render :partial => "form", :object => f %>
-  <%= submit_tag_with_image "Create", "/assets/icons/add.png", "positive button" %>
 <% end %>

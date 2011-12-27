@@ -35,14 +35,6 @@ class Game < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
   
-  def franchise_name=(value)
-    self.franchise = Franchise.find_or_initialize_by_name(value)
-  end
-  
-  def franchise_name
-    self.franchise.name if self.franchise
-  end
-  
   def self.create_or_update_from_hash(g)
     game = Game.find_or_initialize_by_fid(g["id"])
     game.name = g["name"]

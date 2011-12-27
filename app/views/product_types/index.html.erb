@@ -1,6 +1,26 @@
-<% @root.children.all(:order => :rank).each do |parent| %>
-  <p><b><%= link_to parent.name, parent %></b> <%= link_to "(edit)", edit_product_type_path(parent) if current_user %></p>
-  <% parent.children.all(:order => :rank).each do |cat| %>
-  <p><%= link_to cat.name, cat %> <%= link_to "(edit)", edit_product_type_path(cat) if current_user %></p>
-  <% end %>
-<% end %>
+<div class="page-header">
+  <h1>Categories</h1>
+</div>
+
+  <table class="condensed-table zebra-striped">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th># Products</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @root.children.all(:order => :rank).each do |parent| %>
+      <tr>
+        <td><b><%= link_to parent.name, parent %></b> <%= link_to "(edit)", edit_product_type_path(parent) if current_user %></td>
+        <td><%= parent.products.count %></td>
+      </tr>
+      <% parent.children.all(:order => :rank).each do |cat| %>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to cat.name, cat %> <%= link_to "(edit)", edit_product_type_path(cat) if current_user %></td>
+        <td><%= cat.products.count %></td>
+      </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
