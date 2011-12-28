@@ -18,12 +18,10 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(params[:product])
-    AmazonApi.populate_product(@product)
     
     respond_to do |format|
       if @product.save
-        # TODO: Redirect elsewhere if there's no new product to review
-        format.html { redirect_to(new_product_path,
+        format.html { redirect_to(@product,
               :notice => 'Product was successfully created.') }
       else
         format.html { render :action => "new" }

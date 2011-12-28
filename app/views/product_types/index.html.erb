@@ -17,7 +17,7 @@
       </tr>
       <% parent.children.all(:order => :rank).each do |cat| %>
       <tr>
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to cat.name, cat %> <%= link_to "(edit)", edit_product_type_path(cat) if current_user %></td>
+        <td class="indent"><%= link_to cat.name, cat %> <%= link_to "(edit)", edit_product_type_path(cat) if current_user %></td>
         <td><%= cat.products.count %></td>
       </tr>
       <% end %>

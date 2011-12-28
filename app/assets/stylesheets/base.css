@@ -63,7 +63,6 @@ body {
 
 /********* PRODUCT SIDEBAR **********/
 
-
 .item-price {
   margin-bottom: 20px;
 }
@@ -87,4 +86,10 @@ body {
 .other-items img {
   border: 1px solid #EEE;
   display: block;
+}
+
+/********* CATEGORIES **********/
+
+td.indent {
+  padding-left: 20px;
 }
