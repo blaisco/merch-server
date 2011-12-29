@@ -1,3 +1,7 @@
 <% @products.each do |product| %>
-  <p><%= link_to product.name, product %> <%= link_to('(delete)', product, :confirm => 'Are you sure?', :method => :delete) if current_user %></p>
+  <p>
+    <%= link_to product.name, product %> 
+    <%= link_to('(edit)', edit_product_path(product)) if current_user %>
+    <%= link_to('(delete)', product, :confirm => 'Are you sure?', :method => :delete) if current_user %>
+  </p>
 <% end %>

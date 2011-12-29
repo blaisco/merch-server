@@ -32,6 +32,8 @@ class ProductsController < ApplicationController
   def edit
     @title = "Edit product"
     @product = Product.find(params[:id])
+    logger.debug '----------'
+    logger.debug @product.merchandisable.class.to_s + "-" + @product.merchandisable.id.to_s
   end
   
   def update

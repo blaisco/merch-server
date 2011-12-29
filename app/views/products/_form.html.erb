@@ -4,35 +4,49 @@
   <div class="clearfix">
     <label>Name</label>
     <div class="input">
-      <%= @product.name %>
+      <span class="uneditable-input"><%= @product.name %></span>
     </div>
   </div>
   
   <div class="clearfix">
     <label>Summary</label>
     <div class="input">
-      <%= @product.summary %>
+      <span class="uneditable-input" style="width: 460px;"><%= @product.summary %></span>
     </div>
   </div>
   
   <div class="clearfix">
-    <%= form.label :game_id %>
+    <%= form.label :merchant_id %>
     <div class="input">
-      <%= form.select :game_id, options_for_select(Game.all.map { |game| [game.name, game.id] }, @product.game_id)%>
+      <%= form.select :merchant_id, merchant_options_for_select(@product.merchant_id) %>
     </div>
   </div>
   
   <div class="clearfix">
-    <%= form.label :franchise_id %>
+    <%= form.label :merchandisable_string, "Merchandisable" %>
     <div class="input">
-      <%= form.select :franchise_id, options_for_select(Franchise.all.map { |franchise| [franchise.name, franchise.id] }, @product.franchise_id)%>
+      <%= form.select :merchandisable_string, merchandisable_grouped_options(@product.merchandisable) %>
     </div>
   </div>
   
   <div class="clearfix">
-    <%= form.label :product_type_id %>
+    <%# form.label :game_id %>
     <div class="input">
-      <%= form.select :product_type_id, options_for_select(ProductType.all.map { |cat| [cat.name, cat.id] }, @product.product_type_id)%>
+      <%# form.select :game_id, options_for_select(Game.all.map { |game| [game.name, game.id] }, @product.game_id)%>
+    </div>
+  </div>
+  
+  <div class="clearfix">
+    <%# form.label :franchise_id %>
+    <div class="input">
+      <%# form.select :franchise_id, options_for_select(Franchise.all.map { |franchise| [franchise.name, franchise.id] }, @product.franchise_id)%>
+    </div>
+  </div>
+  
+  <div class="clearfix">
+    <%# form.label :product_type_id %>
+    <div class="input">
+      <%# form.select :product_type_id, options_for_select(ProductType.all.map { |cat| [cat.name, cat.id] }, @product.product_type_id)%>
     </div>
   </div>
   
@@ -40,3 +54,11 @@
     <%= form.submit @product.persisted? ? "Update Product" : "Create Product", :class => "primary btn" %>
   </div>
 </fieldset>
+
+<%= content_for :footer do %>
+<script>
+  $(function() {
+    // do stuff
+  });
+</script>
+<% end %>

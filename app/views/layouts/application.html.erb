@@ -2,6 +2,7 @@
 <html>
 <head>
   <title><%= @title ? (@title + " | " + "Video Game Merch") : "Video Game Merch" %></title>
+  <%# stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" %>
   <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -59,6 +60,8 @@
   </div>
 
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
+  <%# javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" %>
   <%= javascript_include_tag "application" %>
+  <%= yield :footer %>
 </body>
 </html>

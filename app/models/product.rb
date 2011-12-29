@@ -50,6 +50,10 @@ class Product < ActiveRecord::Base
             :message => "{{value}} must be in #{STATUSES.join ','}"
             
   before_validation :set_pending_status
+  before_save :set_merchandisable
+  
+  attr_accessor :merchandisable_string
+  attr_accessible :merchant_id, :merchandisable_string
 
   def price_range?
     min_figure.price_in_cents != max_figure.price_in_cents
@@ -67,5 +71,12 @@ class Product < ActiveRecord::Base
   
   def set_pending_status
     self.status ||= 'pending'
+  end
+  
+  def set_merchandisable
+    if merchandisable_string
+      model, id = merchandisable_string.split('-')
+      self.merchandisable = model.constantize.find(id)
+    end
   end
 end

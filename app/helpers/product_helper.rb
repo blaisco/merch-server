@@ -21,4 +21,26 @@ module ProductHelper
       product.max_figure.price.format + " " + product.max_figure.currency
     end
   end
+  
+  def merchant_options_for_select(selected = nil)
+    options_for_select( Merchant.all.map { |merchant| [merchant.name, merchant.id] }, selected )
+  end
+  
+  def merchandisable_grouped_options(merchandisable=nil)
+    selected_key = nil
+    selected_key = (merchandisable.class.to_s + "-" + merchandisable.id.to_s) if merchandisable
+    grouped_options = {
+      'Games' => Game.all.map(&merchandisable_option_for_select),
+      'Franchises' => Franchise.all.map(&merchandisable_option_for_select),
+      'Developers' => Developer.all.map(&merchandisable_option_for_select)
+    }
+
+    grouped_options_for_select(grouped_options, selected_key)
+  end
+
+  private
+
+  def merchandisable_option_for_select
+    lambda {|record| [record.name, "#{record.class.name}-#{record.id}"] }
+  end
 end
