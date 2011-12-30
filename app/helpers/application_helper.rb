@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def submit_tag_with_image(text, image, classes)
-    content_tag(:button, image_tag(image) + " " + text, :type => :submit, :name => "commit", :class => classes)
-  end
-  
   def errors_for(object, message=nil)
     html = ""
     unless object.errors.blank?
@@ -24,5 +20,19 @@ module ApplicationHelper
       html << "\t</div>\n"
     end
     html.html_safe
-  end  
+  end
+  
+  def add_child_object_link(form, object, type, message = nil)
+    type  = type.to_sym
+    types = type.to_s.pluralize
+    message ||= type.to_s.humanize.downcase
+    
+    html = render("#{type}_fields", :form => form, type => object.send(types).build, :index => "NEW")
+    page = "$('##{types}').append(#{prepared_fields(html)});"
+    link_to_function "Add #{message}", page, :class => "add button"
+  end
+  
+  def prepared_fields(html)
+    "'#{escape_javascript(html)}'.replace(/NEW/g, new Date().getTime())"
+  end
 end

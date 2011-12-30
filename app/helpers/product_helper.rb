@@ -43,4 +43,8 @@ module ProductHelper
   def merchandisable_option_for_select
     lambda {|record| [record.name, "#{record.class.name}-#{record.id}"] }
   end
+  
+  def status_options_for_select(selected = nil)
+    options_for_select( Product::STATUSES.map { |status| [status.capitalize, status] }, selected )
+  end
 end

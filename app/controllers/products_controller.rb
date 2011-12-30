@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
   end
   
   def create
+    @title = "New product"
     @product = Product.new(params[:product])
     
     respond_to do |format|
@@ -32,11 +33,10 @@ class ProductsController < ApplicationController
   def edit
     @title = "Edit product"
     @product = Product.find(params[:id])
-    logger.debug '----------'
-    logger.debug @product.merchandisable.class.to_s + "-" + @product.merchandisable.id.to_s
   end
   
   def update
+    @title = "Edit product"
     @product = Product.find(params[:id])
    
     respond_to do |format|

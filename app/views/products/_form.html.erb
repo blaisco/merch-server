@@ -9,33 +9,54 @@
   </div>
   
   <div class="clearfix">
-    <label>Summary</label>
+    <label>Description</label>
     <div class="input">
-      <span class="uneditable-input" style="width: 460px;"><%= @product.summary %></span>
+      <span class="uneditable-input" style="width: 460px;"><%= @product.description %></span>
     </div>
   </div>
   
   <div class="clearfix">
     <%= form.label :merchant_id %>
     <div class="input">
-      <%= form.select :merchant_id, merchant_options_for_select(@product.merchant_id) %>
+      <%= form.select :merchant_id, merchant_options_for_select(@product.merchant_id), {:prompt => true} %>
     </div>
   </div>
   
   <div class="clearfix">
     <%= form.label :merchandisable_string, "Merchandisable" %>
     <div class="input">
-      <%= form.select :merchandisable_string, merchandisable_grouped_options(@product.merchandisable) %>
+      <%= form.select :merchandisable_string, merchandisable_grouped_options(@product.merchandisable), {:prompt => true} %>
     </div>
   </div>
   
   <div class="clearfix">
-    <%# form.label :game_id %>
-    <div class="input">
-      <%# form.select :game_id, options_for_select(Game.all.map { |game| [game.name, game.id] }, @product.game_id)%>
+    <%= form.label :product_types, "Product Types" %>
+    <div id="product_types">
+      <% @product.product_types.each_with_index do |product_type, index| %>
+        <%= render "product_type_fields", :form => form, :product_type => product_type, :index => index %>
+      <% end %>
+    </div>
+    <div class="input action">
+      <%= add_child_object_link(form, @product, :product_type) %>
     </div>
   </div>
   
+  <div class="clearfix">
+    <%= form.label :status %>
+    <div class="input">
+      <ul class="inputs-list">
+        <% Product::STATUSES.each do |status| %>
+        <li>
+          <label>
+            <%= form.radio_button :status, status, { :checked => @product.status == status } %>
+            <span><%= status.capitalize %></span>
+          </label>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
   <div class="clearfix">
     <%# form.label :franchise_id %>
     <div class="input">
