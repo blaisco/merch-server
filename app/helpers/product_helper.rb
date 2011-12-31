@@ -46,9 +46,7 @@ module ProductHelper
     grouped_options_for_select(grouped_options, product_type)
   end
   
-  def related_products(has_products, limit, exclude=nil)
-    products = has_products.products
-    products = products.where("products.id NOT IN (?)", exclude) if exclude
-    products = products.order("RANDOM()").limit(limit)
+  def related_products(has_products, limit, exclude)
+    has_products.products.where("products.id NOT IN (?)", exclude).order("RANDOM()").limit(limit)
   end
 end

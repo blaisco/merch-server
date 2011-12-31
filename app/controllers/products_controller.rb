@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   end
   
   def show
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
     @title = @product.name
   end
   
@@ -32,13 +32,13 @@ class ProductsController < ApplicationController
   
   def edit
     @title = "Edit product"
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
     @product.typifications.build if @product.typifications.size == 0
   end
   
   def update
     @title = "Edit product"
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
    
     respond_to do |format|
       if @product.update_attributes(params[:product])
@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
   end
   
   def destroy
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
     @product.destroy
     redirect_to products_path
   end

@@ -35,6 +35,9 @@ class Product < ActiveRecord::Base
   STATUSES.each do |status|
     scope status.to_sym, where(:status => status)
   end
+  
+  # Use 'unscoped' (before any other sql methods) to override
+  default_scope where(:status => 'active')
 
   belongs_to :merchandisable, :polymorphic => true
   has_many :typifications
