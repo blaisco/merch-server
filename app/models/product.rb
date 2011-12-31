@@ -40,7 +40,7 @@ class Product < ActiveRecord::Base
   has_many :variations, :dependent => :destroy
   has_many :figures, :through => :variations
   has_many :images, :dependent => :destroy
-  accepts_nested_attributes_for :product_types, :allow_destroy => true, :reject_if => proc { |attributes| attributes['type_id'].blank? }
+  accepts_nested_attributes_for :typifications, :allow_destroy => true, :reject_if => proc { |attributes| attributes['product_type_id'].blank? }
   
   serialize :features, Array
   
@@ -50,12 +50,13 @@ class Product < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES,
             :message => "{{value}} must be in #{STATUSES.join ','}"
   validates :merchandisable_string, :on => :update, :presence => true
+  validates :typifications, :presence => true
             
   before_validation :set_pending_status
   before_save :set_merchandisable
   
   attr_accessor :merchandisable_string
-  attr_accessible :merchant_id, :merchandisable_string, :status
+  attr_accessible :merchant_id, :merchandisable_string, :status, :typifications_attributes
 
   def price_range?
     min_figure.price_in_cents != max_figure.price_in_cents

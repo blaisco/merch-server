@@ -21,6 +21,12 @@ body {
   height: auto;
 }
 
+/********* GENERAL **********/
+
+.with_delete {
+  margin-bottom: 10px;
+}
+
 /********* CHECKBOXES **********/
 
 .input input[type="checkbox"] {

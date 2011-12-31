@@ -1,6 +1,6 @@
-<%= form.fields_for :product_types, product_type, :child_index => index do |child_form| %>
+<%= form.fields_for :typifications, typification, :child_index => index do |child_form| %>
 <div class="input with_delete">
-  <%= child_form.collection_select :id, ProductType.all, :id, :name, :prompt => true %>
+  <%= child_form.collection_select :product_type_id, ProductType.all, :id, :name, :prompt => true %>
   <a href="javascript:void(0);" onclick="Merch.deleteNestedItem(this, '.input');" class='delete'>delete</a>
   <%= child_form.hidden_field(:_destroy) %>
 </div>

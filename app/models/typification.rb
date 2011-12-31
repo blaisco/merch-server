@@ -17,4 +17,6 @@
 class Typification < ActiveRecord::Base
   belongs_to :product
   belongs_to :product_type
+  
+  attr_accessible :product_type_id
 end

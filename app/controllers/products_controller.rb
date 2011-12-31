@@ -33,6 +33,7 @@ class ProductsController < ApplicationController
   def edit
     @title = "Edit product"
     @product = Product.find(params[:id])
+    # @product.typifications.build if @product.typifications.size == 0
   end
   
   def update

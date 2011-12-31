@@ -31,13 +31,13 @@
   
   <div class="clearfix">
     <%= form.label :product_types, "Product Types" %>
-    <div id="product_types">
-      <% @product.product_types.each_with_index do |product_type, index| %>
-        <%= render "product_type_fields", :form => form, :product_type => product_type, :index => index %>
+    <div id="typifications">
+      <% @product.typifications.each_with_index do |typification, index| %>
+        <%= render "typification_fields", :form => form, :typification => typification, :index => index %>
       <% end %>
     </div>
     <div class="input action">
-      <%= add_child_object_link(form, @product, :product_type) %>
+      <%= add_child_object_link(form, @product, :typification, "Product Type") %>
     </div>
   </div>
   
