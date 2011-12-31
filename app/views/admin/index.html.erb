@@ -6,7 +6,9 @@
 
 <p><%= Search.count %> searches (<%= @search_count_today %> today)</p>
 
-<p><%= Product.count %> <%= link_to "products", products_path %></p>
+<p><%= Product.count %> <%= link_to "products", products_path %> 
+  (<%= count = Product.pending.count %> <%= count > 0 ? link_to("pending", edit_product_path(Product.pending.first)) : "pending" %>)
+</p>
 
 <p><%= Game.count %> <%= link_to "games", games_path %></p>
 
