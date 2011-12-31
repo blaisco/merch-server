@@ -51,8 +51,8 @@ class Product < ActiveRecord::Base
   
   validates_inclusion_of :status, :in => STATUSES,
             :message => "{{value}} must be in #{STATUSES.join ','}"
-  validates :merchandisable_string, :on => :update, :presence => true
-  validates :typifications, :presence => true
+  validates :merchandisable_string, :presence => true, :on => :update
+  validates :typifications, :presence => true, :on => :update
             
   before_validation :set_pending_status
   before_save :set_merchandisable

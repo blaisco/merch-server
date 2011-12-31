@@ -34,6 +34,7 @@ class ProductJob
 
 
   def self.perform(object)
+    puts 'starting job'
     product = Product.find_or_initialize_by_url(object["url"])
     if product.status != 'inactive' # active or pending products
       checksum = Digest::SHA1.hexdigest(object.to_s)
@@ -47,8 +48,9 @@ class ProductJob
       # Mark as updated even if no changes; I want to know when a product is
       # stale (i.e. no one is trying to update it).
       product.updated_at = Time.now
-      product.save
+      product.save!
     end
+    puts 'ending job'
   end
   
   private
