@@ -77,12 +77,16 @@ body {
 /********* PRODUCT SIDEBAR **********/
 
 .item-price {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 
 .item-amount {
   font-size: 24px;
   margin-bottom: 10px;
+}
+
+.sidebar {
+  margin: 20px 0;
 }
 
 .sidebar-inner {

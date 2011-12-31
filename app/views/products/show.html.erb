@@ -1,7 +1,9 @@
+<% related_product_limit = 3 %>
+
 <div class="row">
   <div class="span11">
     <div id="breadcrumb"><%# breadcrumb(@product.product_type) %></div>
-    <h1><%= @title %></h1>
+    <h1><%= @title %><%= ' '.html_safe + link_to('(edit)', edit_product_path(@product)) if current_user %></h1>
     <div class="row">
       <div class="span11">
         <div id="item-image">
@@ -42,8 +44,11 @@
       <div class="sidebar-inner">
         <h4>Sold by <%= link_to @product.merchant.name, @product.merchant %></h4>
         <div class="other-items">
-          <% @product.merchant.products.limit(3).each do |product| %>
+          <% rp = related_products(@product.merchant, related_product_limit, @product).each do |product| %>
             <%= image_tag product.images.first.data.url(:thumb) %>
+          <% end %>
+          <% if rp.empty? %>
+            <div>No related products available.</div>
           <% end %>
         </div>
       </div>
@@ -52,17 +57,36 @@
       <% unless @product.merchandisable.nil? %>
       <div class="sidebar-inner">
         <h4>Other <%= link_to @product.merchandisable.name, @product.merchandisable %> merch</h4>
+        <div class="other-items">
+          <% rp = related_products(@product.merchandisable, related_product_limit, @product).each do |product| %>
+            <%= image_tag product.images.first.data.url(:thumb) %>
+          <% end %>
+          <% if rp.empty? %>
+            <div>No related products available.</div>
+          <% end %>
+        </div>
       </div>
       <% end %>
       
       <%# Product type(s) sidebar%>
-      <% unless @product.product_types.blank? %>
+        <% @product.product_types.each do |type| %>
         <div class="sidebar-inner">
-          <% @product.product_types.each do |type| %>
-            <%= link_to type.name, type %>
-          <% end %>
+          <h4>More <%= link_to type.name, type %></h4>
+          <div class="other-items">
+            <% rp = related_products(type, 3, @product).each do |product| %>
+              <%= image_tag product.images.first.data.url(:thumb) %>
+            <% end %>
+            <% if rp.empty? %>
+              <div>No related products available.</div>
+            <% end %>
+          </div>
         </div>
       <% end %>
+    </div>
+    
+    <div class="item-price">
+      <div class="item-amount"><%= price(@product) %></div>
+      <div class="item-actions"><a href="<%= @product.url %>" class="btn large success">Check it out &raquo;</a></div>
     </div>
   </div>
 </div>

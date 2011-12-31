@@ -35,4 +35,18 @@ module ApplicationHelper
   def prepared_fields(html)
     "'#{escape_javascript(html)}'.replace(/NEW/g, new Date().getTime())"
   end
+  
+  def product_type_breadcrumb(product_type)
+    html = '<ul class="breadcrumb">'
+    product_type.ancestors.each do |ancestor|
+      if ancestor.is_root?
+        link = product_types_path
+      else
+        link = product_type_path(ancestor)
+      end
+      html << "<li>" + link_to(ancestor.name, link) + "</li> > "
+    end
+    html << '<li class="active">' + product_type.name + "</li></ul>"
+    html.html_safe
+  end
 end

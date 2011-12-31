@@ -1,18 +1,4 @@
-module ProductHelper
-  def breadcrumb(category)
-    html = ""
-    category.ancestors.each do |ancestor|
-      if ancestor.is_root?
-        link = product_types_path
-      else
-        link = product_type_path(ancestor)
-      end
-      html << link_to(ancestor.name, link, :class => "nodename") + " > "
-    end
-    html << link_to(category.name, category, :class => "nodename current")
-    html.html_safe
-  end
-  
+module ProductHelper  
   def price(product)
     if product.price_range?
       product.min_figure.price.format + "-" + product.max_figure.price.format 
@@ -58,5 +44,11 @@ module ProductHelper
       end
     end
     grouped_options_for_select(grouped_options, product_type)
+  end
+  
+  def related_products(has_products, limit, exclude=nil)
+    products = has_products.products
+    products = products.where("products.id NOT IN (?)", exclude) if exclude
+    products = products.order("RANDOM()").limit(limit)
   end
 end
