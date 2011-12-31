@@ -6,7 +6,6 @@ class CreateProducts < ActiveRecord::Migration
       t.string :slug
       t.string :name
       t.string :url
-      t.string :summary
       t.text :description
       t.string :status
       t.string :checksum, :limit => 40

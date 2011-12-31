@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20111222185724) do
   add_index "game_platforms", ["platform_id"], :name => "index_game_platforms_on_platform_id"
 
   create_table "games", :force => true do |t|
-    t.integer  "franchise_id"
     t.string   "name"
     t.string   "slug"
     t.string   "aliases"
@@ -164,7 +163,6 @@ ActiveRecord::Schema.define(:version => 20111222185724) do
     t.string   "slug"
     t.string   "name"
     t.string   "url"
-    t.string   "summary"
     t.text     "description"
     t.string   "status"
     t.string   "checksum",            :limit => 40

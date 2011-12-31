@@ -9,7 +9,6 @@
 #  slug                :string(255)
 #  name                :string(255)
 #  url                 :string(255)
-#  summary             :string(255)
 #  description         :text
 #  status              :string(255)
 #  checksum            :string(40)

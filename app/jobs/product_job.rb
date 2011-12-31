@@ -11,7 +11,6 @@ class ProductJob
     #~ \"image_urls\": [
       #~ \"http://www.example.com/main_images/P0909main.png\"
     #~ ], 
-    #~ \"summary\": \"This strictly limited collector\\u0092s [snip].\", 
     #~ \"inventory\": [
       #~ {
         #~ \"amount_saved\": \"500\", 
@@ -34,7 +33,6 @@ class ProductJob
 
 
   def self.perform(object)
-    puts 'starting job'
     product = Product.find_or_initialize_by_url(object["url"])
     if product.status != 'inactive' # active or pending products
       checksum = Digest::SHA1.hexdigest(object.to_s)
@@ -50,14 +48,12 @@ class ProductJob
       product.updated_at = Time.now
       product.save!
     end
-    puts 'ending job'
   end
   
   private
   
   def self.create_product(product, object)
     product.name = object["name"]
-    product.summary = object["summary"]
     product.description = object["description"]
     product.merchant = Merchant.find_or_initialize_by_url(
       :url => object["merchant_url"], :name => object["merchant_url"]

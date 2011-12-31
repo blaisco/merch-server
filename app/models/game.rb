@@ -3,7 +3,6 @@
 # Table name: games
 #
 #  id           :integer         not null, primary key
-#  franchise_id :integer
 #  name         :string(255)
 #  slug         :string(255)
 #  aliases      :string(255)

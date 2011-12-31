@@ -23,7 +23,7 @@
         </div>
         
         <div class="row">
-          <div id="item-summary" class="span9"><%= @product.summary %></div>
+          <div id="item-summary" class="span9"><%= truncate(@product.description, :length => 160) %></div>
         </div>
         
         <div class="row">
