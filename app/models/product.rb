@@ -28,10 +28,14 @@
 
 class Product < ActiveRecord::Base
   STATUSES = [
-    'pending',  # new product; needs review
     'active',   # product displayed to users
+    'pending',  # new product; needs review
     'inactive'  # product not displayed (ignored)
   ]
+  
+  STATUSES.each do |status|
+    scope status.to_sym, where(:status => status)
+  end
 
   belongs_to :merchandisable, :polymorphic => true
   has_many :typifications
@@ -41,8 +45,6 @@ class Product < ActiveRecord::Base
   has_many :figures, :through => :variations
   has_many :images, :dependent => :destroy
   accepts_nested_attributes_for :typifications, :allow_destroy => true, :reject_if => proc { |attributes| attributes['product_type_id'].blank? }
-  
-  serialize :features, Array
   
   extend FriendlyId
   friendly_id :name, :use => :slugged

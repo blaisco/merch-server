@@ -17,6 +17,7 @@ class MerchantsController < ApplicationController
   end
   
   def create
+  @title = "New merchant"
     @merchant = Merchant.new(params[:merchant])
     
     respond_to do |format|
@@ -35,6 +36,7 @@ class MerchantsController < ApplicationController
   end
   
   def update
+    @title = "Edit merchant"
     @merchant = Merchant.find(params[:id])
    
     respond_to do |format|

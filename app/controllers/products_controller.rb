@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   def edit
     @title = "Edit product"
     @product = Product.find(params[:id])
-    # @product.typifications.build if @product.typifications.size == 0
+    @product.typifications.build if @product.typifications.size == 0
   end
   
   def update
@@ -42,8 +42,16 @@ class ProductsController < ApplicationController
    
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to(@product,
-                      :notice => 'Product was successfully updated.') }
+        if params[:next].blank?
+          format.html { redirect_to(@product, :notice => 'Product was successfully updated.') }
+        else
+          product = Product.pending.first
+          if product
+            format.html { redirect_to(edit_product_path(product), :notice => 'Product was successfully updated.') }
+          else
+            format.html { redirect_to(admin_path, :notice => 'Product was successfully updated.') }
+          end
+        end
       else
         format.html { render :action => "edit" }
       end

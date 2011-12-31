@@ -47,4 +47,16 @@ module ProductHelper
   def status_options_for_select(selected = nil)
     options_for_select( Product::STATUSES.map { |status| [status.capitalize, status] }, selected )
   end
+  
+  def product_type_grouped_options(product_type=nil)
+    root = ProductType.roots.first
+    grouped_options = {}
+    root.children.all(:order => :rank).each do |parent|
+      grouped_options[parent.name] = []
+      parent.children.all(:order => :rank).each do |cat|
+        grouped_options[parent.name] << [cat.name, cat.id]
+      end
+    end
+    grouped_options_for_select(grouped_options, product_type)
+  end
 end

@@ -34,6 +34,7 @@ class GamesController < ApplicationController
   end
   
   def create
+    @title = "New game"
     @game = Game.new(params[:game])
     
     respond_to do |format|
@@ -51,6 +52,7 @@ class GamesController < ApplicationController
   end
   
   def update
+    @title = "Edit game"
   end
   
   def destroy
