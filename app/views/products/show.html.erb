@@ -17,7 +17,7 @@
           <% end %>
         </div>
         <div id="item-thumbs">
-          <% if @product.images.size == 1 %>
+          <% if @product.images.size > 1 %>
             <% @product.images.each do |img| %>
               <%= image_tag img.data.url(:thumb), :alt => "Product thumbnail" %>
             <% end %>
@@ -63,6 +63,16 @@
             :exclude => @product } 
         %>
       <% end %>
+      
+      <div class="sidebar-inner">
+        <h3 class="center">Like this? Show your friends!</h3>
+        <div class="share-buttons">
+        <% unless @product.images.blank? %>
+          <a href="http://pinterest.com/pin/create/button/?url=<%= root_url %>&media=<%= root_url.chop + @product.images.first.data.url %>&description=<%= truncate(@product.name, :length => 250) %>" class="pin-it-button" count-layout="none">Pin It</a>
+        <% end %>
+        </div>
+        <div style="clear: both"></div>
+      </div>
     </div>
     
     <div class="item-price">

@@ -23,6 +23,12 @@ body {
 
 /********* GENERAL **********/
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .with_delete {
   margin-bottom: 10px;
 }
@@ -121,5 +127,5 @@ body {
 /********* CATEGORIES **********/
 
 td.indent {
-  padding-left: 20px;
+  display: block;
 }
