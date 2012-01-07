@@ -1,5 +1,3 @@
-<% related_product_limit = 3 %>
-
 <div class="row">
   <div class="span11">
     <div id="breadcrumb"><%# breadcrumb(@product.product_type) %></div>
@@ -40,47 +38,26 @@
     </div>
     
     <div class="sidebar">
-      <%# Merchant sidebar %>
-      <div class="sidebar-inner">
-        <h4>Sold by <%= link_to @product.merchant.name, @product.merchant %></h4>
-        <div class="other-items">
-          <% rp = related_products(@product.merchant, related_product_limit, @product).each do |product| %>
-            <%= image_tag product.images.first.data.url(:thumb) %>
-          <% end %>
-          <% if rp.empty? %>
-            <div>No related products available.</div>
-          <% end %>
-        </div>
-      </div>
+      <%= render :partial => "related_products_sidebar", :locals => { 
+          :headline => "Sold by %s",
+          :has_products => @product.merchant, 
+          :exclude => @product } 
+      %>
       
-      <%# Game/Franchise sidebar %>
       <% unless @product.merchandisable.nil? %>
-      <div class="sidebar-inner">
-        <h4>Other <%= link_to @product.merchandisable.name, @product.merchandisable %> merch</h4>
-        <div class="other-items">
-          <% rp = related_products(@product.merchandisable, related_product_limit, @product).each do |product| %>
-            <%= image_tag product.images.first.data.url(:thumb) %>
-          <% end %>
-          <% if rp.empty? %>
-            <div>No related products available.</div>
-          <% end %>
-        </div>
-      </div>
+      <%= render :partial => "related_products_sidebar", :locals => { 
+          :headline => "Other %s merch",
+          :has_products => @product.merchandisable, 
+          :exclude => @product } 
+      %>
       <% end %>
       
-      <%# Product type(s) sidebar%>
-        <% @product.product_types.each do |type| %>
-        <div class="sidebar-inner">
-          <h4>More <%= link_to type.name, type %></h4>
-          <div class="other-items">
-            <% rp = related_products(type, 3, @product).each do |product| %>
-              <%= image_tag product.images.first.data.url(:thumb) %>
-            <% end %>
-            <% if rp.empty? %>
-              <div>No related products available.</div>
-            <% end %>
-          </div>
-        </div>
+      <% @product.product_types.each do |type| %>
+        <%= render :partial => "related_products_sidebar", :locals => { 
+            :headline => "More %s",
+            :has_products => type, 
+            :exclude => @product } 
+        %>
       <% end %>
     </div>
     
