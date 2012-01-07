@@ -14,6 +14,7 @@ gem 'nokogiri',     '~> 1.5.0'
 gem 'friendly_id',  '~> 4.0.0.beta14'
 gem 'rails_config', '~> 0.2.5'
 gem 'paperclip',    '~> 2.4.5'
+gem 'meta-tags',    '~> 1.2.4', :require => 'meta_tags'
 # gem 'resque',       '~> 1.19.0'
 
 group :test do

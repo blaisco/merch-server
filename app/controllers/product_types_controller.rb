@@ -2,7 +2,6 @@ class ProductTypesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @title = "Categories"
     @root = ProductType.roots.first
   end
   
@@ -12,12 +11,10 @@ class ProductTypesController < ApplicationController
   end
   
   def new
-    @title = "Create product type"
     @category = ProductType.new
   end
   
   def create
-    @title = "Create product type"
     @category = ProductType.new(params[:product_type])
     
     respond_to do |format|
@@ -31,12 +28,10 @@ class ProductTypesController < ApplicationController
   end
   
   def edit
-    @title = "Edit product type"
     @category = ProductType.find(params[:id])
   end
   
   def update
-    @title = "Edit product type"
     @category = ProductType.find(params[:id])
    
     respond_to do |format|

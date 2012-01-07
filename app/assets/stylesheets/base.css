@@ -97,12 +97,25 @@ body {
 
 .other-items {
   background-color: #FFF;
-  padding: 5px;
+  padding: 8px;
 }
 
-.other-items img {
+.other-items:after {
+  clear: both;
+  display: table;
+  content: "";
+}
+
+.other-items a {
   border: 1px solid #EEE;
   display: block;
+  float: left;
+  padding: 2px;
+  margin-right: 8px;
+}
+
+.other-items a:last-child {
+  margin-right: 0;
 }
 
 /********* CATEGORIES **********/

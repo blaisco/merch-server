@@ -2,7 +2,6 @@ class MerchantsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @title = "Merchants"
     @merchants = Merchant.all
   end
   
@@ -12,12 +11,10 @@ class MerchantsController < ApplicationController
   end
   
   def new
-    @title = "New merchant"
     @merchant = Merchant.new
   end
   
   def create
-  @title = "New merchant"
     @merchant = Merchant.new(params[:merchant])
     
     respond_to do |format|
@@ -31,12 +28,10 @@ class MerchantsController < ApplicationController
   end
   
   def edit
-    @title = "Edit merchant"
     @merchant = Merchant.find(params[:id])
   end
   
   def update
-    @title = "Edit merchant"
     @merchant = Merchant.find(params[:id])
    
     respond_to do |format|

@@ -70,6 +70,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (1.2.4)
+      actionpack
     mime-types (1.17.2)
     minitest (2.9.1)
     money (4.0.1)
@@ -158,6 +160,7 @@ DEPENDENCIES
   friendly_id (~> 4.0.0.beta14)
   jquery-rails (~> 1.0.19)
   json (~> 1.6.2)
+  meta-tags (~> 1.2.4)
   minitest (~> 2.9.1)
   money (~> 4.0.1)
   mongrel (~> 1.2.0.pre2)

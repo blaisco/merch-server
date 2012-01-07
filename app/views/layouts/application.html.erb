@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @title ? (@title + " | " + "Video Game Merch") : "Video Game Merch" %></title>
+  <%= display_meta_tags :site => 'Video Game Merch', :reverse => true %>
   <%# stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" %>
   <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>

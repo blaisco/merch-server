@@ -49,4 +49,34 @@ module ApplicationHelper
     html << '<li class="active">' + product_type.name + "</li></ul>"
     html.html_safe
   end
+  
+def meta(field = nil, text = '')
+  field = field.to_s
+  @meta ||= {
+    'title' => 'Video Game Merch'
+  }
+
+  if field.present?
+
+    case field
+      when 'title' then
+        @meta[field] = text + " | " + @meta[field]
+        content = @meta[field]
+      when 'description' then
+        @meta[field] = text
+        content = truncate(strip_tags(h(@meta[field])), :length => 160)
+      else
+        @meta[field] = text
+        content = @meta[field]
+    end
+
+    return raw(%(<meta #{att}="#{h(field)}" content="#{h(content)}"/>))
+  else
+    tags = ''
+    @meta.each do |field, list|
+      tags += meta(field)+"\n"
+    end
+    return tags.rstrip
+  end
+end
 end

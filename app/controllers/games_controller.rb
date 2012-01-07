@@ -2,7 +2,6 @@ class GamesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @title = "Games"
   	@games = Game.all
   end
   
@@ -12,7 +11,6 @@ class GamesController < ApplicationController
   end
   
   def find
-    @title = "Search for games"
     @query = params[:q]
     if @query
       query_on = clean_query(@query)
@@ -29,12 +27,10 @@ class GamesController < ApplicationController
   end
   
   def new
-    @title = "New game"
     @game = Game.new(params[:game])
   end
   
   def create
-    @title = "New game"
     @game = Game.new(params[:game])
     
     respond_to do |format|
@@ -47,12 +43,10 @@ class GamesController < ApplicationController
   end
   
   def edit
-    @title = "Edit game"
     @game = Game.find(params[:id])
   end
   
   def update
-    @title = "Edit game"
   end
   
   def destroy

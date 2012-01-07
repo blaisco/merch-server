@@ -2,22 +2,18 @@ class ProductsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @title = "Products"
   	@products = Product.all
   end
   
   def show
     @product = Product.unscoped.find(params[:id])
-    @title = @product.name
   end
   
   def new
-    @title = "New product"
     @product = AmazonApi.get_reviewable_product
   end
   
   def create
-    @title = "New product"
     @product = Product.new(params[:product])
     
     respond_to do |format|
@@ -31,13 +27,11 @@ class ProductsController < ApplicationController
   end
   
   def edit
-    @title = "Edit product"
     @product = Product.unscoped.find(params[:id])
     @product.typifications.build if @product.typifications.size == 0
   end
   
   def update
-    @title = "Edit product"
     @product = Product.unscoped.find(params[:id])
    
     respond_to do |format|

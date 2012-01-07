@@ -1,7 +1,9 @@
+<% description truncate(@product.description, :length => 160) %>
+
 <div class="row">
   <div class="span11">
     <div id="breadcrumb"><%# breadcrumb(@product.product_type) %></div>
-    <h1><%= @title %><%= ' '.html_safe + link_to('(edit)', edit_product_path(@product)) if current_user %></h1>
+    <h1><%= title @product.name %><%= ' '.html_safe + link_to('(edit)', edit_product_path(@product)) if current_user %></h1>
     <div class="row">
       <div class="span11">
         <div id="item-image">
@@ -21,7 +23,7 @@
         </div>
         
         <div class="row">
-          <div id="item-summary" class="span9"><%= truncate(@product.description, :length => 160) %></div>
+          <div id="item-summary" class="span9"><%= simple_format(truncate(@product.description, :length => 250)) %></div>
         </div>
         
         <div class="row">
