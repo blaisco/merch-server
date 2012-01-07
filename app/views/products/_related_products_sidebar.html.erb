@@ -8,7 +8,8 @@
       <div>No related products available.</div>
     <% else %>
       <% rp.each do |product| %>
-        <%= link_to image_tag(product.images.first.data.url(:thumb), :alt => product.name), product %>
+        <%= link_to image_tag(product.images.first.data.url(:thumb), 
+          :alt => product.name, :title => product.name), product %>
       <% end %>
     <% end %>
   </div>

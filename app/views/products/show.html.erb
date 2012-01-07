@@ -11,13 +11,15 @@
             <%# TODO: Get a default image_tag for a no-image image %>
             <%= image_tag nil %>
           <% else %>
-            <%= link_to image_tag(@product.images.first.data.url(:medium)), @product.images.first.data.url %>
+            <%= link_to(
+                image_tag(@product.images.first.data.url(:medium), :alt => "Main product image"), 
+              @product.images.first.data.url) %>
           <% end %>
         </div>
         <div id="item-thumbs">
           <% if @product.images.size == 1 %>
             <% @product.images.each do |img| %>
-              <%= image_tag img.data.url(:thumb) %>
+              <%= image_tag img.data.url(:thumb), :alt => "Product thumbnail" %>
             <% end %>
           <% end %>
         </div>

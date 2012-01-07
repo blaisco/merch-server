@@ -1,5 +1,6 @@
 $(function() {
   $(".alert-message").alert();
+  $(".other-items img").twipsy();
 });
 
 (function($, undefined) {
