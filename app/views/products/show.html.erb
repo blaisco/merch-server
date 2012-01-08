@@ -7,19 +7,14 @@
     <div class="row">
       <div class="span11">
         <div id="item-image">
-          <% if @product.images.blank? %>
-            <%# TODO: Get a default image_tag for a no-image image %>
-            <%= image_tag nil %>
-          <% else %>
-            <%= link_to(
-                image_tag(@product.images.first.data.url(:medium), :alt => "Main product image"), 
-              @product.images.first.data.url) %>
-          <% end %>
+          <%= link_to(
+              image_tag(@image.data.url(:medium), :alt => "Main product image"), 
+            @image.data.url) %>
         </div>
         <div id="item-thumbs">
           <% if @product.images.size > 1 %>
             <% @product.images.each do |img| %>
-              <%= image_tag img.data.url(:thumb), :alt => "Product thumbnail" %>
+              <%= link_to image_tag(img.data.url(:thumb), :alt => "Product thumbnail"), product_path(@product, {:image_id => img.id}), {:"data-medium-image" => root_url.chop + img.data.url(:medium)} %>
             <% end %>
           <% end %>
         </div>
@@ -36,10 +31,9 @@
   </div>
   
   <div class="span5">
-    <div class="item-price">
-      <div class="item-amount"><%= price(@product) %></div>
-      <div class="item-actions"><a href="<%= @product.url %>" class="btn large success">Check it out &raquo;</a></div>
-    </div>
+    <%= render :partial => "price_sidebar", :locals => {
+        :product => @product } 
+    %>
     
     <div class="sidebar">
       <%= render :partial => "related_products_sidebar", :locals => { 
@@ -63,21 +57,36 @@
             :exclude => @product } 
         %>
       <% end %>
-      
+      <!--
       <div class="sidebar-inner">
         <h3 class="center">Like this? Show your friends!</h3>
         <div class="share-buttons">
-        <% unless @product.images.blank? %>
-          <a href="http://pinterest.com/pin/create/button/?url=<%= root_url %>&media=<%= root_url.chop + @product.images.first.data.url %>&description=<%= truncate(@product.name, :length => 250) %>" class="pin-it-button" count-layout="none">Pin It</a>
-        <% end %>
+          <a href="http://pinterest.com/pin/create/button/?url=<%= root_url %>&media=<%= root_url.chop + @image.data.url %>&description=<%= truncate(@product.name, :length => 250) %>" class="pin-it-button" count-layout="horizontal">Pin It</a>
         </div>
         <div style="clear: both"></div>
       </div>
+      -->
     </div>
+
     
-    <div class="item-price">
-      <div class="item-amount"><%= price(@product) %></div>
-      <div class="item-actions"><a href="<%= @product.url %>" class="btn large success">Check it out &raquo;</a></div>
-    </div>
+    <%= render :partial => "price_sidebar", :locals => {
+        :product => @product } 
+    %>
   </div>
 </div>
+
+<%= content_for :footer do %>
+<script>
+  $(function() {
+    $(".other-items img").twipsy();
+    
+    $("#item-thumbs a").click(function(event) {
+      event.preventDefault();
+      var url = $(this).data('medium-image');
+      // Update primary image and link
+      $('#item-image').children('a').attr('href',url).children('img').attr('src',url);
+      // TODO: Update pinterest button url
+    });
+  });
+</script>
+<% end %>

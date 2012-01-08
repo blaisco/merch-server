@@ -1,13 +1,4 @@
 module ProductHelper  
-  def price(product)
-    if product.price_range?
-      product.min_figure.price.format + "-" + product.max_figure.price.format 
-            + " " + product.max_figure.currency
-    else
-      product.max_figure.price.format + " " + product.max_figure.currency
-    end
-  end
-  
   def merchant_options_for_select(selected = nil)
     options_for_select( Merchant.all.map { |merchant| [merchant.name, merchant.id] }, selected )
   end

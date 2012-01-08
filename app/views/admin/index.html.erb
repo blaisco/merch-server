@@ -10,14 +10,10 @@
   (<%= count = Product.pending.count %> <%= count > 0 ? link_to("pending", edit_product_path(Product.pending.first)) : "pending" %>)
 </p>
 
+<p><%= ProductType.count %> <%= link_to "product types", product_types_path %></p>
+
 <p><%= Game.count %> <%= link_to "games", games_path %></p>
 
 <p><%= Developer.count %> <%= link_to "developers", developers_path %></p>
-
-<p><%= Platform.count %> <%= link_to "platforms", platforms_path %></p>
-
-<p><%= Genre.count %> <%= link_to "genres", genres_path %></p>
-
-<p><%= ProductType.count %> <%= link_to "product types", product_types_path %></p>
 
 <p><%= Merchant.count %> <%= link_to "merchants", merchants_path %></p>

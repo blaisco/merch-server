@@ -62,6 +62,11 @@ class Product < ActiveRecord::Base
   attr_accessor :merchandisable_string
   attr_accessible :merchant_id, :merchandisable_string, :status, :typifications_attributes
 
+  # Return the first image, or a default image
+  def primary_image
+    images.first || Image.new
+  end
+
   def price_range?
     min_figure.price_in_cents != max_figure.price_in_cents
   end

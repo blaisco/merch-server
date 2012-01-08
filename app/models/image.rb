@@ -24,5 +24,7 @@ class Image < ActiveRecord::Base
 
   belongs_to :product
   
-  has_attached_file :data, :styles => { :medium => "550x>", :thumb => "70x70#" }
+  has_attached_file :data, 
+        :styles => { :medium => "550x>", :thumb => "70x70#" },
+        :default_url => '/images/missing_:style.jpg'
 end

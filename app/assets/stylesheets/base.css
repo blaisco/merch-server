@@ -49,7 +49,7 @@ body {
 #item-image {
   display: block;
   float: left;
-  width: 552px;
+  width: 550px;
   border: 1px solid #EEE;
   margin-bottom: 20px;
 }
@@ -67,13 +67,14 @@ body {
 #item-thumbs {
   display: block;
   float: left;
-  width: 72px;
+  width: 70px;
   margin-left: 5px;
 }
 
 #item-thumbs img {
   border: 1px solid #EEE;
   display: block;
+  margin-bottom: 5px;
 }
 
 #item-summary {
@@ -82,14 +83,24 @@ body {
 
 /********* PRODUCT SIDEBAR **********/
 
-.item-price {
+.price-container {
   /*margin-bottom: 20px;*/
 }
 
-.item-amount {
+.item-price {
   font-size: 24px;
   margin-bottom: 10px;
 }
+
+.amount {}
+
+.old-amount {
+  text-decoration: line-through;
+  color: #BFBFBF;
+  font-size: 18px;
+}
+
+.currency {}
 
 .sidebar {
   margin: 20px 0;
@@ -118,6 +129,8 @@ body {
   float: left;
   padding: 2px;
   margin-right: 8px;
+  width: 70px;
+  height: 70px;
 }
 
 .other-items a:last-child {

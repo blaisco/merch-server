@@ -30,12 +30,16 @@ Merch::Application.routes.draw do
     get 'find', :on => :collection
     get 'add',  :on => :member
   end
-  resources :developers, :genres, :platforms, :products, :merchants
+  resources :developers, :merchants
+  resources :series, :controller => "franchises", :as => "franchises"
   resources :categories, :controller => "product_types", :as => "product_types"
   
   resource :amazon_api do
     resources :junctions
   end
+  
+  resources :products, :except => :show
+  match '/:id' => 'products#show', :as => 'product'
 
   # Sample resource route with options:
   #   resources :products do

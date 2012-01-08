@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   
   def show
     @product = Product.unscoped.find(params[:id])
+    @image = @product.images.find_by_id(params[:image_id]) || @product.primary_image
   end
   
   def new
