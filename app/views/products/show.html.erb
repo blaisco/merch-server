@@ -24,7 +24,9 @@
         </div>
         
         <div class="row">
-          <div id="item-summary" class="span11">[insert Facebook comments here]</div>
+          <div id="item-summary" class="span11">
+            <div class="fb-comments" data-href="http://www.videogamemerch.com/" data-num-posts="10" data-width="640"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -76,6 +78,15 @@
 </div>
 
 <%= content_for :footer do %>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=116034751818658";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <script>
   $(function() {
     $(".other-items img").twipsy();
