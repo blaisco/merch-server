@@ -2,10 +2,22 @@
   <h1><%= title "Products" %></h1>
 </div>
 
-<% @products.each do |product| %>
-  <p>
-    <%= link_to product.name, product %> 
-    <%= link_to('(edit)', edit_product_path(product)) if current_user %>
-    <%= link_to('(delete)', product, :confirm => 'Are you sure?', :method => :delete) if current_user %>
-  </p>
-<% end %>
+<div class="row">
+  <div class="span3">
+    rawr
+  </div>
+  <div class="span13">
+    <ul class="listings">
+      <% @products.each do |product| %>
+        <li>
+          <%= link_to image_tag("http://placekitten.com/170/135", :alt => product.name), product %>
+          <div class="listing-detail">
+            <div class="listing-title"><%= link_to product.name, product %></div>
+            <div class="listing-merchant"><%= link_to product.merchant.name, product.merchant %></div>
+            <div class="listing-price"><%= product.max_figure.price.format %></div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

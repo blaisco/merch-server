@@ -147,3 +147,51 @@ body {
 td.indent {
   display: block;
 }
+
+/********* LISTINGS **********/
+
+ul.listings {
+  list-style: none;
+  margin: 0;
+}
+
+ul.listings li {
+  width: 170px;
+  background-color: #FEFEFE;
+  border: 1px solid #EEE;
+  float: left;
+  display: inline;
+  padding: 5px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.listing-detail {
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.listing-title {
+  white-space: nowrap;
+	width: 170px;
+  overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.listing-merchant {
+  white-space: nowrap;
+	width: 100px;
+  overflow: hidden;
+	text-overflow: ellipsis;
+  float: left;
+}
+
+.listing-merchant a {
+  color: #BFBFBF;
+}
+
+.listing-price {
+	width: 70px;
+  float: right;
+  text-align: right;
+}
