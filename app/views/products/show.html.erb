@@ -14,7 +14,9 @@
         <div id="item-thumbs">
           <% if @product.images.size > 1 %>
             <% @product.images.each do |img| %>
-              <%= link_to image_tag(img.data.url(:thumb), :alt => "Product thumbnail"), product_path(@product, {:image_id => img.id}), {:"data-medium-image" => root_url.chop + img.data.url(:medium)} %>
+              <div class="thumb">
+                <%= link_to image_tag(img.data.url(:thumb), :alt => "Product thumbnail"), product_path(@product, {:image_id => img.id}), {:"data-medium-image" => root_url.chop + img.data.url(:medium)} %>
+              </div>
             <% end %>
           <% end %>
         </div>

@@ -10,7 +10,9 @@
     <ul class="listings">
       <% @products.each do |product| %>
         <li>
-          <%= link_to image_tag("http://placekitten.com/170/135", :alt => product.name), product %>
+          <div class="listing-image">
+            <%= link_to image_tag(product.primary_image.data(:small), :alt => product.name), product %>
+          </div>
           <div class="listing-detail">
             <div class="listing-title"><%= link_to product.name, product %></div>
             <div class="listing-merchant"><%= link_to product.merchant.name, product.merchant %></div>
