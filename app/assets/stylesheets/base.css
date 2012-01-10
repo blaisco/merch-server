@@ -137,6 +137,11 @@ body {
   margin-right: 0;
 }
 
+.share-buttons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 /********* CATEGORIES **********/
 
 td.indent {

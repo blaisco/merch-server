@@ -32,9 +32,10 @@ class Product < ActiveRecord::Base
     'inactive'  # product not displayed (ignored)
   ]
   
-  STATUSES.each do |status|
-    scope status.to_sym, where(:status => status)
-  end
+  scope :active, where("status = ? AND updated_at >= ?", :active, 1.week.ago)
+  scope :stale, where("status = ? AND updated_at < ?", :active, 1.week.ago)
+  scope :inactive, where(:status => "inactive")
+  scope :pending, where(:status => "pending")
   
   # Use 'unscoped' (before any other sql methods) to override
   default_scope where(:status => 'active')

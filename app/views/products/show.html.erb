@@ -25,7 +25,7 @@
         
         <div class="row">
           <div id="item-summary" class="span11">
-            <div class="fb-comments" data-href="http://www.videogamemerch.com/" data-num-posts="10" data-width="640"></div>
+            <div class="fb-comments" data-href="<%= product_url(@product, :only_path => false) %>" data-num-posts="10" data-width="640"></div>
           </div>
         </div>
       </div>
@@ -68,6 +68,14 @@
         <div style="clear: both"></div>
       </div>
       -->
+      <div class="sidebar-inner">
+        <h3 class="center">Like this? Show your friends!</h3>
+        <div class="share-buttons">
+          <span  class='st_facebook_button' displayText='Facebook'></span>
+          <span  class='st_twitter_button' displayText='Tweet'></span>
+          <span  class='st_plusone_button' ></span>
+        </div>
+      </div>
     </div>
 
     
@@ -78,6 +86,8 @@
 </div>
 
 <%= content_for :footer do %>
+
+<%# Facebook social plugin code %>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -86,6 +96,9 @@
   js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=116034751818658";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+
+<%# ShareThis code %>
+<script type="text/javascript">var switchTo5x=false;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'43e339ec-54fc-468c-bdea-194e1b4e832d'});</script>
 
 <script>
   $(function() {
