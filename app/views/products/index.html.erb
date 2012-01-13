@@ -2,24 +2,4 @@
   <h1><%= title "Products" %></h1>
 </div>
 
-<div class="row">
-  <div class="span3">
-    rawr
-  </div>
-  <div class="span13">
-    <ul class="listings">
-      <% @products.each do |product| %>
-        <li>
-          <div class="listing-image">
-            <%= link_to image_tag(product.primary_image.data(:small), :alt => product.name), product %>
-          </div>
-          <div class="listing-detail">
-            <div class="listing-title"><%= link_to product.name, product %></div>
-            <div class="listing-merchant"><%= link_to product.merchant.name, product.merchant %></div>
-            <div class="listing-price"><%= product.max_figure.price.format %></div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+<%= render :partial => "products/listings", :locals => { :products => @products } %>

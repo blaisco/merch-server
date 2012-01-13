@@ -203,13 +203,18 @@ ul.listings li {
 }
 
 .listing-merchant a {
-  color: #BFBFBF;
+  color: #808080;
 }
 
 .listing-price {
 	width: 70px;
   float: right;
   text-align: right;
+  color: #7C4;
+}
+
+.listing-currency {
+  font-size: 9px;
 }
 
 .listing-image {

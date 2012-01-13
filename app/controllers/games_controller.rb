@@ -7,7 +7,7 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.find(params[:id])
-    @title = @game.name + " Merch" # replace "Merch" with something more specific (based on merch categories)
+    @products = @game.products
   end
   
   def find
