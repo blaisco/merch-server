@@ -26,16 +26,17 @@
 #
 
 class Product < ActiveRecord::Base
-  STATUSES = [
-    'active',   # product displayed to users
-    'pending',  # new product; needs review
-    'inactive'  # product not displayed (ignored)
-  ]
+  STATUSES = { 
+    :active => 1,   # product displayed to users
+    :pending => 2,  # new product; needs review
+    :inactive => 3  # product not displayed (ignored)
+  }
   
-  scope :active, where("status = ? AND updated_at >= ?", :active, 1.week.ago)
-  scope :stale, where("status = ? AND updated_at < ?", :active, 1.week.ago)
-  scope :inactive, where(:status => "inactive")
-  scope :pending, where(:status => "pending")
+  
+  scope :active, where("status = ? AND updated_at >= ?", STATUSES[:active], 1.week.ago)
+  scope :stale, where("status = ? AND updated_at < ?", STATUSES[:active], 1.week.ago)
+  scope :inactive, where(:status => STATUSES[:inactive])
+  scope :pending, where(:status => STATUSES[:pending])
   
   # Use 'unscoped' (before any other sql methods) to override
   #default_scope where("status = ? AND updated_at >= ?", :active, 1.week.ago)
@@ -52,8 +53,8 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
   
-  validates_inclusion_of :status, :in => STATUSES,
-            :message => "{{value}} must be in #{STATUSES.join ','}"
+  #validates_inclusion_of :status, :in => STATUSES,
+  #          :message => "{{value}} must be in #{STATUSES.join ','}"
   validates :merchandisable_string, :presence => true, :on => :update
   validates :typifications, :presence => true, :on => :update
             
@@ -67,10 +68,7 @@ class Product < ActiveRecord::Base
     # fields
     indexes :name, :sortable => true
     
-    indexes :status
-    #indexes :updated_at
-    
-    has :updated_at
+    has :status, :updated_at
     
     # Not including this because this way everything is in the index, and as 
     # soon as the status changes then it's immediately in the search results
@@ -79,7 +77,7 @@ class Product < ActiveRecord::Base
   
   # This filters things down to match our :active scope above
   sphinx_scope(:active) { 
-    {:conditions => {:status => 'active'}, :with => {:updated_at => 1.week.ago..Time.now}}
+    {:with => {:status => STATUSES[:active], :updated_at => 1.week.ago..Time.now}}
   }
 
   default_sphinx_scope :active
@@ -104,7 +102,7 @@ class Product < ActiveRecord::Base
   private
   
   def set_pending_status
-    self.status ||= 'pending'
+    self.status ||= STATUSES[:pending]
   end
   
   def set_merchandisable

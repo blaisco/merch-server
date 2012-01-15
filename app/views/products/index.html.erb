@@ -1,5 +1,10 @@
 <div class="page-header">
-  <h1><%= title "Products" %></h1>
+  <h1><%= title "Search" %></h1>
 </div>
+
+<%= form_tag(products_path, :method => :get) do |f| %>
+  <%= text_field_tag :q, @query %>
+  <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
+<% end %>
 
 <%= render :partial => "products/listings", :locals => { :products => @products } %>

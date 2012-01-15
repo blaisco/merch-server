@@ -7,7 +7,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :name
       t.string :url
       t.text :description
-      t.string :status
+      t.integer :status
       t.string :checksum, :limit => 40
       t.datetime :checksum_changed_at
 

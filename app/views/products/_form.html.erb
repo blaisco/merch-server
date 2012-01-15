@@ -52,12 +52,12 @@
     <%= form.label :status %>
     <div class="input">
       <ul class="inputs-list">
-        <% Product::STATUSES.each do |status| %>
+        <% Product::STATUSES.each do |status, value| %>
         <li>
           <label>
-            <%= form.radio_button :status, status, { :checked => @product.status == status } %>
+            <%= form.radio_button :status, value, { :checked => @product.status == value } %>
             <% indicators = { "active" => "success", "inactive" => "important", "pending" => ""} %>
-            <span class="label <%= indicators[status] %>"><%= status.capitalize %></span>
+            <span class="label <%= indicators[status.to_s] %>"><%= status.to_s %></span>
           </label>
         </li>
         <% end %>
