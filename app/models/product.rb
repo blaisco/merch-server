@@ -38,7 +38,7 @@ class Product < ActiveRecord::Base
   scope :pending, where(:status => "pending")
   
   # Use 'unscoped' (before any other sql methods) to override
-  default_scope where(:status => 'active')
+  #default_scope where("status = ? AND updated_at >= ?", :active, 1.week.ago)
 
   belongs_to :merchandisable, :polymorphic => true
   has_many :typifications
@@ -62,6 +62,27 @@ class Product < ActiveRecord::Base
   
   attr_accessor :merchandisable_string
   attr_accessible :merchant_id, :merchandisable_string, :status, :typifications_attributes
+  
+  define_index do
+    # fields
+    indexes :name, :sortable => true
+    
+    indexes :status
+    #indexes :updated_at
+    
+    has :updated_at
+    
+    # Not including this because this way everything is in the index, and as 
+    # soon as the status changes then it's immediately in the search results
+    ## where("status = 'active' AND updated_at >= '" + 1.week.ago.to_s(:db) + "'")
+  end
+  
+  # This filters things down to match our :active scope above
+  sphinx_scope(:active) { 
+    {:conditions => {:status => 'active'}, :with => {:updated_at => 1.week.ago..Time.now}}
+  }
+
+  default_sphinx_scope :active
 
   # Return the first image, or a default image
   def primary_image

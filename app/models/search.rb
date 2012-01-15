@@ -11,6 +11,6 @@
 #
 
 class Search < ActiveRecord::Base
-  attr_accessible :query, :ip_address
+  attr_accessible :query, :ip_address, :num_results
 
 end

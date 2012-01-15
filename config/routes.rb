@@ -19,7 +19,7 @@ Merch::Application.routes.draw do
     resources :products
   end
   
-  resources :searches, :path => "/search"
+  match '/search' => 'search#index'
   
   namespace :user do
     root :to => "admin#index"
@@ -31,8 +31,8 @@ Merch::Application.routes.draw do
     get 'add',  :on => :member
   end
   resources :developers, :merchants
-  resources :series, :controller => "franchises", :as => "franchises"
-  resources :categories, :controller => "product_types", :as => "product_types"
+  resources :series, :controller => 'franchises', :as => 'franchises'
+  resources :categories, :controller => 'product_types', :as => 'product_types'
   
   resource :amazon_api do
     resources :junctions
@@ -76,7 +76,7 @@ Merch::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'searches#new'
+  root :to => 'search#index'
 
   # See how all your routes lay out with "rake routes"
 
