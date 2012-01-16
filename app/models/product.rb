@@ -41,7 +41,11 @@ class Product < ActiveRecord::Base
   # Use 'unscoped' (before any other sql methods) to override
   #default_scope where("status = ? AND updated_at >= ?", :active, 1.week.ago)
 
-  belongs_to :merchandisable, :polymorphic => true
+  #belongs_to :merchandisable, :polymorphic => true
+  belongs_to :game
+  belongs_to :developer
+  belongs_to :franchise
+  
   has_many :typifications
   has_many :product_types, :through => :typifications, :dependent => :destroy
   belongs_to :merchant
@@ -68,11 +72,14 @@ class Product < ActiveRecord::Base
     # fields
     indexes :name, :sortable => true
     indexes :description
-    indexes merchandisable(:name), :as => :merchandisable, :sortable => true, :facet => true
+    #indexes merchandisable(:name), :as => :merchandisable, :sortable => true, :facet => true
+    indexes game(:name), :as => :game, :sortable => true, :facet => true
+    indexes franchise(:name), :as => :franchise, :sortable => true, :facet => true
+    indexes developer(:name), :as => :developer, :sortable => true, :facet => true
     indexes merchant(:name), :as => :merchant, :sortable => true, :facet => true
-    indexes product_types(:name), :as => :product_type, :sortable => true, :facet => true
     
     has :status, :updated_at
+    has product_types(:id), :as => :product_type, :facet => true
     
     # Not including this because this way everything is in the index, and as 
     # soon as the status changes then it's immediately in the search results
@@ -88,7 +95,7 @@ class Product < ActiveRecord::Base
 
   # Return the first image, or a default image
   def primary_image
-    images.first || Image.new
+    @primary_image ||= images.first || Image.new
   end
 
   def price_range?
@@ -103,6 +110,10 @@ class Product < ActiveRecord::Base
     @max_figure ||= figures.order('price_in_cents DESC').first 
   end
   
+  def merchandisable
+    @merchandisable ||= game || franchise || developer
+  end
+  
   private
   
   def set_pending_status
@@ -111,8 +122,12 @@ class Product < ActiveRecord::Base
   
   def set_merchandisable
     unless merchandisable_string.blank?
+      self.game = nil
+      self.franchise = nil
+      self.developer = nil
+      
       model, id = merchandisable_string.split('-')
-      self.merchandisable = model.constantize.find(id)
+      self.send(model.downcase + "_id=", id)
     end
   end
 end

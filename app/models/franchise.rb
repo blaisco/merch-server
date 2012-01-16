@@ -18,7 +18,7 @@
 class Franchise < ActiveRecord::Base
   has_many :game_franchises, :dependent => :destroy
   has_many :games, :through => :game_franchises
-  has_many :products, :as => :merchandisable
+  has_many :products
   
   attr_accessible :name, :slug
 

@@ -27,7 +27,7 @@ class Game < ActiveRecord::Base
   has_many    :genres, :through => :game_genres
   has_many    :franchises, :through => :game_franchises
   belongs_to  :franchise
-  has_many    :products, :as => :merchandisable
+  has_many    :products
   
   attr_accessible :fid, :name, :slug, :release_date
   
