@@ -53,8 +53,8 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
   
-  #validates_inclusion_of :status, :in => STATUSES,
-  #          :message => "{{value}} must be in #{STATUSES.join ','}"
+  validates_inclusion_of :status, :in => STATUSES.values,
+            :message => "must be in #{STATUSES.keys * ', '}"
   validates :merchandisable_string, :presence => true, :on => :update
   validates :typifications, :presence => true, :on => :update
             
@@ -67,6 +67,10 @@ class Product < ActiveRecord::Base
   define_index do
     # fields
     indexes :name, :sortable => true
+    indexes :description
+    indexes merchandisable(:name), :as => :merchandisable, :sortable => true, :facet => true
+    indexes merchant(:name), :as => :merchant, :sortable => true, :facet => true
+    indexes product_types(:name), :as => :product_type, :sortable => true, :facet => true
     
     has :status, :updated_at
     
@@ -76,11 +80,11 @@ class Product < ActiveRecord::Base
   end
   
   # This filters things down to match our :active scope above
-  sphinx_scope(:active) { 
-    {:with => {:status => STATUSES[:active], :updated_at => 1.week.ago..Time.now}}
-  }
+  #sphinx_scope(:active) { 
+  #  {:with => {:status => STATUSES[:active], :updated_at => 1.week.ago..Time.now}}
+  #}
 
-  default_sphinx_scope :active
+  #default_sphinx_scope :active
 
   # Return the first image, or a default image
   def primary_image

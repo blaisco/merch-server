@@ -2,9 +2,20 @@
   <h1><%= title "Search" %></h1>
 </div>
 
-<%= form_tag(products_path, :method => :get) do |f| %>
-  <%= text_field_tag :q, @query %>
-  <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
-<% end %>
+<% if @products.nil? %>
 
-<%= render :partial => "products/listings", :locals => { :products => @products } %>
+<div class="alert-message block-message error">
+<p><strong>Sorry!</strong></p>
+  <p>Searching is temporarily offline.</p>
+</div>
+
+<% else %>
+
+  <%= form_tag(products_path, :method => :get) do |f| %>
+    <%= text_field_tag :q, @query %>
+    <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
+  <% end %>
+
+  <%= render :partial => "products/listings", :locals => { :products => @products } %>
+
+<% end %>
