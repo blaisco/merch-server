@@ -27,15 +27,15 @@
 
 class Product < ActiveRecord::Base
   STATUSES = { 
-    :active => 1,   # product displayed to users
+    :approved => 1,   # product displayed to users
     :pending => 2,  # new product; needs review
-    :inactive => 3  # product not displayed (ignored)
+    :denied => 3  # product not displayed (ignored)
   }
   
   
-  scope :active, where("status = ? AND updated_at >= ?", STATUSES[:active], 1.week.ago)
-  scope :stale, where("status = ? AND updated_at < ?", STATUSES[:active], 1.week.ago)
-  scope :inactive, where(:status => STATUSES[:inactive])
+  scope :active, where("status = ? AND updated_at >= ?", STATUSES[:approved], 1.week.ago)
+  scope :stale, where("status = ? AND updated_at < ?", STATUSES[:approved], 1.week.ago)
+  scope :inactive, where(:status => STATUSES[:denied])
   scope :pending, where(:status => STATUSES[:pending])
   
   # Use 'unscoped' (before any other sql methods) to override
@@ -73,13 +73,14 @@ class Product < ActiveRecord::Base
     indexes :name, :sortable => true
     indexes :description
     #indexes merchandisable(:name), :as => :merchandisable, :sortable => true, :facet => true
-    indexes game(:name), :as => :game, :sortable => true, :facet => true
-    indexes franchise(:name), :as => :franchise, :sortable => true, :facet => true
-    indexes developer(:name), :as => :developer, :sortable => true, :facet => true
-    indexes merchant(:name), :as => :merchant, :sortable => true, :facet => true
+    indexes game(:name), :as => :game, :facet => true
+    indexes franchise(:name), :as => :franchise, :facet => true
+    indexes developer(:name), :as => :developer, :facet => true
+    indexes merchant(:name), :as => :merchant, :facet => true
+    indexes product_types(:name), :as => :product_type
     
     has :status, :updated_at
-    has product_types(:id), :as => :product_type, :facet => true
+    has product_types(:id), :as => :product_type_id, :facet => true
     
     # Not including this because this way everything is in the index, and as 
     # soon as the status changes then it's immediately in the search results
@@ -88,7 +89,7 @@ class Product < ActiveRecord::Base
   
   # This filters things down to match our :active scope above
   #sphinx_scope(:active) { 
-  #  {:with => {:status => STATUSES[:active], :updated_at => 1.week.ago..Time.now}}
+  #  {:with => {:status => STATUSES[:approved], :updated_at => 1.week.ago..Time.now}}
   #}
 
   #default_sphinx_scope :active

@@ -56,7 +56,7 @@
         <li>
           <label>
             <%= form.radio_button :status, value, { :checked => @product.status == value } %>
-            <% indicators = { "active" => "success", "inactive" => "important", "pending" => ""} %>
+            <% indicators = { "approved" => "success", "denied" => "important", "pending" => ""} %>
             <span class="label <%= indicators[status.to_s] %>"><%= status.to_s %></span>
           </label>
         </li>

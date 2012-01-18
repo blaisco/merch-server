@@ -34,7 +34,7 @@ class ProductJob
 
   def self.perform(object)
     product = Product.find_or_initialize_by_url(object["url"])
-    if product.status != Product::STATUSES[:inactive] # active or pending products
+    if product.status != Product::STATUSES[:denied] # active, stale, or pending products
       checksum = Digest::SHA1.hexdigest(object.to_s)
       if product.checksum.nil? or product.checksum != checksum # new product or product changed
         product.checksum = checksum

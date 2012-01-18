@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1><%= title "Search" %></h1>
+</div>
+
+<div class="row">
+  <div class="span16">
+    <%= form_tag(search_path, :method => :get) do |f| %>
+      <%= text_field_tag :q, @query, :class => "span4" %>
+      <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
+    <% end %>
+  </div>
+</div>
+
+<% if @products.nil? %>
+
+<div class="alert-message block-message error">
+<p><strong>Sorry!</strong></p>
+  <p>Searching is temporarily offline.</p>
+</div>
+
+<% else %>
+
+  <%= render :partial => "products/listings", :locals => { :products => @products } %>
+
+<% end %>

@@ -2,14 +2,7 @@ class ProductsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-  	@query = params[:q] || ""
-    terms = clean_query(@query)
-    @products = Product.search terms, :populate => true
-    @facets = Product.facets
-    #Search.create(:query => terms, :ip_address => request.remote_ip, :num_results => @products.size)
-  rescue Riddle::ConnectionError
-    # flash.now[:notice] = "RAWR"
-    @products = nil
+  	# TODO
   end
   
   def show

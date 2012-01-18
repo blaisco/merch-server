@@ -38,6 +38,8 @@ Merch::Application.routes.draw do
     resources :junctions
   end
   
+  match '/search' => 'search#index'
+  
   resources :products, :path => '/'
   # match '/:id' => 'products#show', :as => 'short_product', :via => 'get'
 

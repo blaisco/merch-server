@@ -169,6 +169,8 @@ td.indent {
 ul.listings {
   list-style: none;
   margin: 0;
+  float: left;
+  clear: left;
 }
 
 ul.listings li {
@@ -220,6 +222,7 @@ ul.listings li {
 .listing-image {
   width: 170px;
   height: 135px;
+  margin-bottom: 5px;
 }
 
 .listing-image a, .listing-image img {

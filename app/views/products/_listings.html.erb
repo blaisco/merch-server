@@ -1,18 +1,14 @@
 <div class="row">
   <div class="span3">
-
-
-<% @facets.each do |facet, facet_options| %>
-  <h5><%= facet %></h5>
-  <ul>
-  <% facet_options.each do |option, count| %>
-    <li><%= link_to "#{option} (#{count})",
-      :params => {facet => option, :page => 1} %></li>
-  <% end %>
-  </ul>
-<% end %>
-    
-    
+    <% @facets.each do |facet, facet_options| %>
+      <h5><%= facet %></h5>
+      <ul>
+      <% facet_options.each do |option, count| %>
+        <li><%= link_to "#{option} (#{count})",
+          :params => {facet => option, :page => 1} %></li>
+      <% end %>
+      </ul>
+    <% end %>
   </div>
   <div class="span13">
     <ul class="listings">
@@ -32,5 +28,10 @@
         </li>
       <% end %>
     </ul>
+    <div style="clear: both"></div>
+
+    <div class="pagination">
+      <%= will_paginate @products, :renderer => PaginationListLinkRenderer, :class => nil %>
+    </div>
   </div>
 </div>
