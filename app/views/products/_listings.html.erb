@@ -1,13 +1,20 @@
 <div class="row">
   <div class="span3">
-    <% @facets.each do |facet, facet_options| %>
-      <h5><%= facet %></h5>
-      <ul>
-      <% facet_options.each do |option, count| %>
-        <li><%= link_to "#{option} (#{count})",
-          :params => {facet => option, :page => 1} %></li>
+    <% @facets.each do |facet, facet_options| 
+      # Facets include an "other" option (nil or 0). We dont want them, so they get removed.
+      facet_options.delete(nil)
+      facet_options.delete(0)
+      unless facet_options.empty? %>
+        <div class="facet">
+          <h5><%= facet.to_s.humanize %></h5>
+          <ul>
+          <% facet_options.sort_by { |f| f[0].to_s }.each do |option, count| %>
+            <li><%= link_to("#{option} (#{count})",
+              :params => {facet => option, :page => 1}) unless option.blank? %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
     <% end %>
   </div>
   <div class="span13">

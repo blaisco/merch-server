@@ -234,3 +234,14 @@ ul.listings li {
   width: auto;
   height: auto;
 }
+
+/********* FACETS **********/
+
+.facet ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.facet li {
+  font-size: 12px;
+}

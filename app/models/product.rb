@@ -32,7 +32,6 @@ class Product < ActiveRecord::Base
     :denied => 3  # product not displayed (ignored)
   }
   
-  
   scope :active, where("status = ? AND updated_at >= ?", STATUSES[:approved], 1.week.ago)
   scope :stale, where("status = ? AND updated_at < ?", STATUSES[:approved], 1.week.ago)
   scope :inactive, where(:status => STATUSES[:denied])
@@ -69,10 +68,8 @@ class Product < ActiveRecord::Base
   attr_accessible :merchant_id, :merchandisable_string, :status, :typifications_attributes
   
   define_index do
-    # fields
     indexes :name, :sortable => true
     indexes :description
-    #indexes merchandisable(:name), :as => :merchandisable, :sortable => true, :facet => true
     indexes game(:name), :as => :game, :facet => true
     indexes franchise(:name), :as => :franchise, :facet => true
     indexes developer(:name), :as => :developer, :facet => true
@@ -81,18 +78,14 @@ class Product < ActiveRecord::Base
     
     has :status, :updated_at
     has product_types(:id), :as => :product_type_id, :facet => true
-    
-    # Not including this because this way everything is in the index, and as 
-    # soon as the status changes then it's immediately in the search results
-    ## where("status = 'active' AND updated_at >= '" + 1.week.ago.to_s(:db) + "'")
   end
   
   # This filters things down to match our :active scope above
-  #sphinx_scope(:active) { 
-  #  {:with => {:status => STATUSES[:approved], :updated_at => 1.week.ago..Time.now}}
-  #}
+  sphinx_scope(:sphinx_active) { 
+    {:with => {:status => STATUSES[:approved], :updated_at => 1.week.ago..Time.now}}
+  }
 
-  #default_sphinx_scope :active
+  default_sphinx_scope :sphinx_active
 
   # Return the first image, or a default image
   def primary_image
