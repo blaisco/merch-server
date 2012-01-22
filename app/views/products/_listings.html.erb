@@ -10,7 +10,8 @@
           <ul>
           <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
           <% @facet_records.each do |record| %>
-            <li><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder(record))) %></li>
+            <% builder = url_builder(record) %>
+            <li><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(builder)) %></li>
             <!-- search_path(url_builder(facet, option)) -->
           <% end %>
           </ul>

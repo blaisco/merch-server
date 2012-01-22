@@ -18,31 +18,26 @@ module ProductHelper
   # Add/remove a record to/from a url.
   # If the record is already in the url, it's removed. Otherwise, it's added.
   def url_builder(record)
-    id_field = id_field(record)
+    field = record.class.to_s.tableize
     vars = params.dup
-
-    if vars.has_key? id_field
-      if vars[id_field].include? record.id.to_s
-        vars[id_field].delete record.id.to_s
-        vars.delete(id_field) if vars[id_field].empty?
+    
+    if vars.has_key? field
+      ids = vars[field].split(',')
+      if ids.include? record.id.to_s
+        ids.delete record.id.to_s
+        vars.delete(field) if ids.empty?
       else
-        vars[id_field].push record.id
+        ids.push record.id.to_s
       end
+      vars[field] = ids.join(',') if vars.has_key? field
     else
-      vars[id_field] = [record.id]
+      vars[field] = record.id.to_s
     end
     
     vars
   end
-
-
-
-  private
   
-  # Converts a record's class into a param string (e.g. Game to game_id)
-  def id_field(record)
-    record.class.to_s.downcase + "_id"
-  end
+  private
 
   def merchandisable_option_for_select
     lambda {|record| [record.name, "#{record.class.name}-#{record.id}"] }

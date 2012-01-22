@@ -8,6 +8,7 @@ class SearchController < ApplicationController
           :page => params[:page], 
           :per_page => 40, 
           :include => [:merchant, :images, :figures])
+          #:with => {:game => [13,12]})
     @facets = @products.facets
     #Search.create(:query => terms, :ip_address => request.remote_ip, :num_results => @products.size)
   rescue Riddle::ConnectionError
