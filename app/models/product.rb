@@ -70,14 +70,19 @@ class Product < ActiveRecord::Base
   define_index do
     indexes :name, :sortable => true
     indexes :description
-    indexes game(:name), :as => :game, :facet => true
-    indexes franchise(:name), :as => :franchise, :facet => true
-    indexes developer(:name), :as => :developer, :facet => true
-    indexes merchant(:name), :as => :merchant, :facet => true
-    indexes product_types(:name), :as => :product_type
+    
+    #~ indexes game(:name), :as => :game, :facet => true
+    #~ indexes franchise(:name), :as => :franchise, :facet => true
+    #~ indexes developer(:name), :as => :developer, :facet => true
+    #~ indexes merchant(:name), :as => :merchant, :facet => true
+    #~ indexes product_types(:name), :as => :product_type, :facet => true
     
     has :status, :updated_at
-    has product_types(:id), :as => :product_type_id, :facet => true
+    has game(:id), :as => :game, :facet => true
+    has franchise(:id), :as => :franchise, :facet => true
+    has developer(:id), :as => :developer, :facet => true
+    has merchant(:id), :as => :merchant, :facet => true
+    has product_types(:id), :as => :product_type, :facet => true
   end
   
   # This filters things down to match our :active scope above
@@ -97,11 +102,11 @@ class Product < ActiveRecord::Base
   end
   
   def min_figure
-    @min_figure ||= figures.order('price_in_cents ASC').first
+    @min_figure ||= figures.first
   end
   
   def max_figure
-    @max_figure ||= figures.order('price_in_cents DESC').first 
+    @max_figure ||= figures.last 
   end
   
   def merchandisable

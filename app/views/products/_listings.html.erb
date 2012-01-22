@@ -8,9 +8,10 @@
         <div class="facet">
           <h5><%= facet.to_s.humanize %></h5>
           <ul>
-          <% facet_options.sort_by { |f| f[0].to_s }.each do |option, count| %>
-            <li><%= link_to("#{option} (#{count})",
-              :params => {facet => option, :page => 1}) unless option.blank? %></li>
+          <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
+          <% @facet_records.each do |record| %>
+            <li><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder(record))) %></li>
+            <!-- search_path(url_builder(facet, option)) -->
           <% end %>
           </ul>
         </div>

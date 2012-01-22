@@ -3,7 +3,7 @@ class ProductTypesController < ApplicationController
 
   def index
     @root = ProductType.roots.first
-    @counts = Product.facets(:facets => [:product_type_id])[:product_type_id]
+    @counts = Product.facets(:facets => [:product_type])[:product_type]
   end
   
   def show

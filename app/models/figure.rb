@@ -15,6 +15,8 @@ class Figure < ActiveRecord::Base
   belongs_to :offer
 
   attr_accessible :price_in_cents, :amount_saved_in_cents, :currency # , :shipping_cost_in_cents
+  
+  default_scope :order => "price_in_cents ASC"
 
   composed_of :price,
     :class_name => "Money",

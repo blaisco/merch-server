@@ -14,12 +14,12 @@
     <% parents.each do |parent, children| %>
       <tr>
         <td><b><%= link_to parent[:name], product_type_path(parent) %></b> <%= link_to "(edit)", edit_product_type_path(parent) if current_user %></td>
-        <td><%= @counts[parent[:id]] %></td>
+        <td><%= @counts[parent[:name]] %></td>
       </tr>
       <% children.each do |cat, cat_children| %>
         <tr>
           <td class="indent"><%= link_to cat[:name], product_type_path(cat) %> <%= link_to "(edit)", edit_product_type_path(cat) if current_user %></td>
-          <td><%= @counts[cat[:id]] %></td>
+          <td><%= @counts[cat[:name]] %></td>
         </tr>
       <% end %>
     <% end %>
