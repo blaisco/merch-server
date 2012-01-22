@@ -1,18 +1,22 @@
 <div class="row">
   <div class="span3">
-    <% @facets.each do |facet, facet_options| 
+    <% {
+    :game => "Game", 
+    :franchise => "Series", 
+    :developer => "Developer", 
+    :merchant => "Merchant", 
+    :product_type => "Category"}.each do |facet, name| 
+      facet_options = @facets[facet]
       # Facets include an "other" option (nil or 0). We dont want them, so they get removed.
       facet_options.delete(nil)
       facet_options.delete(0)
       unless facet_options.empty? %>
         <div class="facet">
-          <h5><%= facet.to_s.humanize %></h5>
+          <h5><%= name %></h5>
           <ul>
           <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
           <% @facet_records.each do |record| %>
-            <% builder = url_builder(record) %>
-            <li><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(builder)) %></li>
-            <!-- search_path(url_builder(facet, option)) -->
+            <li><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder(record))) %></li>
           <% end %>
           </ul>
         </div>
