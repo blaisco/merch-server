@@ -17,7 +17,7 @@ module ProductHelper
   
   # Add/remove a record to/from a url.
   # If the record is already in the url, it's removed. Otherwise, it's added.
-  def url_builder(record)
+  def url_builder_multi(record)
     field = record.class.to_s.tableize
     vars = params.dup
     
@@ -30,6 +30,30 @@ module ProductHelper
         ids.push record.id.to_s
       end
       vars[field] = ids.join(',') if vars.has_key? field
+    else
+      vars[field] = record.id.to_s
+    end
+    
+    vars
+  end
+  
+  def params_includes?(record)
+    field = record.class.to_s.tableize
+    params.has_key?(field) && params[field] == record.id.to_s
+  end
+  
+  # Add/remove a record to/from a url.
+  # If the record is already in the url, it's removed. Otherwise, it's added.
+  def url_builder_single(record)
+    field = record.class.to_s.tableize
+    vars = params.dup
+    
+    if vars.has_key? field
+      if vars[field] == record.id.to_s
+        vars.delete(field)
+      else
+        vars[field] = record.id.to_s
+      end
     else
       vars[field] = record.id.to_s
     end

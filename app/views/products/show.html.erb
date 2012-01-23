@@ -22,7 +22,7 @@
         </div>
         
         <div class="row">
-          <div id="item-summary" class="span9"><%= simple_format(truncate(@product.description, :length => 250)) %></div>
+          <div id="item-summary" class="span9"><%= truncate(@product.description, :length => 250) %> <%= link_to("[read more]", @product.url) if @product.description.size > 250 %></div>
         </div>
         
         <div class="row">
@@ -61,15 +61,7 @@
             :exclude => @product } 
         %>
       <% end %>
-      <!--
-      <div class="sidebar-inner">
-        <h3 class="center">Like this? Show your friends!</h3>
-        <div class="share-buttons">
-          <a href="http://pinterest.com/pin/create/button/?url=<%= root_url %>&media=<%= root_url.chop + @image.data.url %>&description=<%= truncate(@product.name, :length => 250) %>" class="pin-it-button" count-layout="horizontal">Pin It</a>
-        </div>
-        <div style="clear: both"></div>
-      </div>
-      -->
+
       <div class="sidebar-inner">
         <h3 class="center">Like this? Show your friends!</h3>
         <div class="share-buttons">

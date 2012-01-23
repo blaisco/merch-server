@@ -237,11 +237,23 @@ ul.listings li {
 
 /********* FACETS **********/
 
+.facet {
+  margin-bottom: 20px;
+}
+
 .facet ul {
   list-style: none;
-  margin-left: 0;
+  margin: 0;
 }
 
 .facet li {
   font-size: 12px;
+}
+
+.facet li.selected {
+  background-color: lightgray;
+}
+
+.facet ul ul li {
+  margin-left: 14px;
 }

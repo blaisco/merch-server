@@ -15,6 +15,7 @@ class SearchController < ApplicationController
           :include => [:merchant, :images, :figures],
           :with => facets)
     @facets = @products.facets
+    @root = ProductType.roots.first
     #Search.create(:query => terms, :ip_address => request.remote_ip, :num_results => @products.size)
   rescue Riddle::ConnectionError
     # flash.now[:notice] = "RAWR"
