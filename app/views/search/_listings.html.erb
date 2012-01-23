@@ -5,14 +5,18 @@
     <% facet_options = @facets[:product_type] %>
     <% @root.subtree.arrange(:order => :rank).each do |root, parents| %>
       <% parents.each do |parent, children| %>
+        <% unless children.keys.collect{|cat| facet_options[cat[:id]]}.compact.blank? %>
         <ul>
           <li><b><%= link_to "#{parent[:name]}", '#' %></b></li>
-          <% children.each do |cat, cat_children| %>
-            <ul>
-              <li><%= link_to "#{cat[:name]} (#{facet_options[cat[:id]]})", search_path(url_builder_multi(cat)) %></li>
-            </ul>
+          <% children.keys.each do |cat| %>
+          <ul>
+            <% unless facet_options[cat[:id]].blank? %>
+            <li <%= "class=selected" if params_includes? cat %>><%= link_to "#{cat[:name]} (#{facet_options[cat[:id]]})", search_path(url_builder(cat)) %></li>
+            <% end %>
+          </ul>
           <% end %>
         </ul>
+        <% end %>
       <% end %>
     <% end %>
     </div>
@@ -32,7 +36,7 @@
           <ul>
           <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
           <% @facet_records.each do |record| %>
-            <li <%= "class=selected" if params_includes? record %>><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder_single(record))) %></li>
+            <li <%= "class=selected" if params_includes? record %>><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder(record))) %></li>
           <% end %>
           </ul>
         </div>
