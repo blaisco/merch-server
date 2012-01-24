@@ -4,7 +4,8 @@
       <h1 style="line-height: 30px;"><%= title "Search" %></h1>
     </div>
     <div class="span13">
-      <%= form_tag(search_path, :method => :get) do |f| %>
+      <%# Using a real form tag to avoid getting utf8=✓ in my url %>
+      <form action="<%= search_path %>" method="get">
         <%= text_field_tag :q, @query, :class => "span6" %>
         
         <% [:games, :franchises, :developers, :merchants, :product_types].each do |f| %>
@@ -12,7 +13,7 @@
         <% end %>
         
         <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
-      <% end %>
+      </form>
     </div>
   </div>
 </div>

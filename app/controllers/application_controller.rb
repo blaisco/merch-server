@@ -4,4 +4,5 @@ class ApplicationController < ActionController::Base
   def clean_query(query)
     query.downcase.strip.squeeze(" ")
   end
+
 end

@@ -47,33 +47,35 @@
   </div>
   
   <div class="span13">
-    <div class="filters">
-      <h4>Applied Filters</h4>
-      <% unless @query.blank? %>
-        <div class="filter">
-          <span class="type">Keywords:</span>
-          <span class="term"><%= @query %></span>
-          <span class="remove"><%= link_to "(remove)", params_remove(:q) %></span>
-        </div>
-      <% end %>
-      <% {
-      :game => "Game", 
-      :franchise => "Series", 
-      :developer => "Developer", 
-      :merchant => "Merchant", 
-      :product_type => "Category"}.each do |facet, name|
-        if params[facet.to_s.pluralize] && !params[facet.to_s.pluralize].blank?
-          ids = params[facet.to_s.pluralize].split(',')
-          records = facet.to_s.classify.constantize.order(:name).find_all_by_id(ids)
-          %>
+    <% unless @query.blank? && [:games, :franchises, :developrs, :merchants, :product_types].select{|f| params[f] }.empty? %>
+      <div class="filters">
+        <h4>Applied Filters</h4>
+        <% unless @query.blank? %>
           <div class="filter">
-            <span class="type"><%= name %>:</span>
-            <span class="term"><%= records.collect(&:name).join(', ') %></span>
-            <span class="remove"><%= link_to "(remove)", params_remove(facet.to_s.pluralize) %></span>
+            <span class="type">Keywords:</span>
+            <span class="term"><%= @query %></span>
+            <span class="remove"><%= link_to "(remove)", params_remove(:q) %></span>
           </div>
-      <%  end
-        end %>
-    </div>
+        <% end %>
+        <% {
+        :game => "Game", 
+        :franchise => "Series", 
+        :developer => "Developer", 
+        :merchant => "Merchant", 
+        :product_type => "Category"}.each do |facet, name|
+          if params[facet.to_s.pluralize]
+            ids = params[facet.to_s.pluralize].split(',')
+            records = facet.to_s.classify.constantize.order(:name).find_all_by_id(ids)
+            %>
+            <div class="filter">
+              <span class="type"><%= name %>:</span>
+              <span class="term"><%= records.collect(&:name).join(', ') %></span>
+              <span class="remove"><%= link_to "(remove)", params_remove(facet.to_s.pluralize) %></span>
+            </div>
+        <%  end
+          end %>
+      </div>
+    <% end %>
   
     <ul class="listings">
       <% products.each do |product| %>
