@@ -250,6 +250,7 @@ ul.listings li {
 .facet h5 {
   border-bottom: 1px solid #DDD;
   margin-bottom: 10px;
+  line-height: 30px;
 }
 
 .facet ul {
@@ -258,7 +259,8 @@ ul.listings li {
 }
 
 .facet li {
-  font-size: 12px;
+  font-size: 11px;
+  color: #404040;
 }
 
 .facet li.selected {
@@ -279,6 +281,20 @@ ul.listings li {
   padding-bottom: 10px;
 }
 
+.filter {
+  margin-left: 20px;
+}
+
 .filter .term {
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+	text-overflow: ellipsis;
+  max-width: 580px;
+  line-height: 15px;
+  display: inline-block;
+}
+
+.filter .remove {
+  margin-left: 10px;
 }

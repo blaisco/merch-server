@@ -42,6 +42,12 @@ module ProductHelper
     params.has_key?(field) && params[field].split(',').include?(record.id.to_s)
   end
   
+  def params_remove(key)
+    vars = params.dup
+    vars.delete(key)
+    vars
+  end
+  
   private
 
   def merchandisable_option_for_select
