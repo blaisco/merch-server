@@ -237,8 +237,19 @@ ul.listings li {
 
 /********* FACETS **********/
 
+.facets {
+  background-color: #EEE;
+  border: 1px solid #DDD;
+  padding: 3px;
+}
+
 .facet {
   margin-bottom: 20px;
+}
+
+.facet h5 {
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 10px;
 }
 
 .facet ul {
@@ -256,4 +267,18 @@ ul.listings li {
 
 .facet ul ul li {
   margin-left: 14px;
+}
+
+/********* FILTERS **********/
+
+.filters {
+  background-color: #EEE;
+  border: 1px solid #DDD;
+  padding: 3px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.filter .term {
+  font-weight: bold;
 }

@@ -14,7 +14,9 @@ class SearchController < ApplicationController
           :per_page => 40, 
           :include => [:merchant, :images, :figures],
           :with => facets)
-    @facets = @products.facets
+    #@facets = @products.facets
+    facets.delete(:product_type)
+    @facets = Product.facets(terms, :with => facets)
     @root = ProductType.roots.first
     #Search.create(:query => terms, :ip_address => request.remote_ip, :num_results => @products.size)
   rescue Riddle::ConnectionError

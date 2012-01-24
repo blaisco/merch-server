@@ -39,7 +39,7 @@ module ProductHelper
   
   def params_includes?(record)
     field = record.class.to_s.tableize
-    params.has_key?(field) && params[field] == record.id.to_s
+    params.has_key?(field) && params[field].split(',').include?(record.id.to_s)
   end
   
   private

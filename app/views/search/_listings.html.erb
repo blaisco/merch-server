@@ -1,49 +1,63 @@
 <div class="row">
   <div class="span3">
-    <div class="facet">
-    <h5>Categories</h5>
-    <% facet_options = @facets[:product_type] %>
-    <% @root.subtree.arrange(:order => :rank).each do |root, parents| %>
-      <% parents.each do |parent, children| %>
-        <% unless children.keys.collect{|cat| facet_options[cat[:id]]}.compact.blank? %>
-        <ul>
-          <li><b><%= link_to "#{parent[:name]}", '#' %></b></li>
-          <% children.keys.each do |cat| %>
+    <div class="facets">
+      <div class="facet">
+      <h5>Categories</h5>
+      <% facet_options = @facets[:product_type] %>
+      <% @root.subtree.arrange(:order => :rank).each do |root, parents| %>
+        <% parents.each do |parent, children| %>
+          <% unless children.keys.collect{|cat| facet_options[cat[:id]]}.compact.blank? %>
           <ul>
-            <% unless facet_options[cat[:id]].blank? %>
-            <li <%= "class=selected" if params_includes? cat %>><%= link_to "#{cat[:name]} (#{facet_options[cat[:id]]})", search_path(url_builder(cat)) %></li>
+            <li><b><%= link_to "#{parent[:name]}", '#' %></b></li>
+            <% children.keys.each do |cat| %>
+            <ul>
+              <% unless facet_options[cat[:id]].blank? %>
+              <li <%= "class=selected" if params_includes? cat %>><%= link_to "#{cat[:name]} (#{facet_options[cat[:id]]})", search_path(url_builder(cat)) %></li>
+              <% end %>
+            </ul>
             <% end %>
           </ul>
           <% end %>
-        </ul>
         <% end %>
       <% end %>
-    <% end %>
+      </div>
+    
+      <% {
+      :game => "Game", 
+      :franchise => "Series", 
+      :developer => "Developer", 
+      :merchant => "Merchant"}.each do |facet, name| 
+        facet_options = @facets[facet]
+        # Facets include an "other" option (nil or 0). We dont want them, so they get removed.
+        facet_options.delete(nil)
+        facet_options.delete(0)
+        unless facet_options.empty? %>
+          <div class="facet">
+            <h5><%= name %></h5>
+            <ul>
+            <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
+            <% @facet_records.each do |record| %>
+              <li <%= "class=selected" if params_includes? record %>><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder(record))) %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
     </div>
+  </div>
   
-    <% {
-    :game => "Game", 
-    :franchise => "Series", 
-    :developer => "Developer", 
-    :merchant => "Merchant"}.each do |facet, name| 
-      facet_options = @facets[facet]
-      # Facets include an "other" option (nil or 0). We dont want them, so they get removed.
-      facet_options.delete(nil)
-      facet_options.delete(0)
-      unless facet_options.empty? %>
-        <div class="facet">
-          <h5><%= name %></h5>
-          <ul>
-          <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
-          <% @facet_records.each do |record| %>
-            <li <%= "class=selected" if params_includes? record %>><%= link_to("#{record.name} (#{facet_options[record.id]})", search_path(url_builder(record))) %></li>
-          <% end %>
-          </ul>
+  <div class="span13">
+    <div class="filters">
+      <h4>Applied Filters</h4>
+      <% unless @query.empty? %>
+        <div class="filter">
+          <span class="type">Keywords:</span>
+          <span class="term"><%= @query %></span>
+          <span class="remove"><%= link_to "remove", "#" %></span>
         </div>
       <% end %>
-    <% end %>
-  </div>
-  <div class="span13">
+    </div>
+  
     <ul class="listings">
       <% products.each do |product| %>
         <li>

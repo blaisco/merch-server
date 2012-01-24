@@ -1,5 +1,20 @@
 <div class="page-header">
-  <h1><%= title "Search" %></h1>
+  <div class="row">
+    <div class="span3">
+      <h1 style="line-height: 30px;"><%= title "Search" %></h1>
+    </div>
+    <div class="span13">
+      <%= form_tag(search_path, :method => :get) do |f| %>
+        <%= text_field_tag :q, @query, :class => "span6" %>
+        
+        <% [:games, :franchises, :developers, :merchants, :product_types].each do |f| %>
+          <%= hidden_field_tag f, params[f] if params[f] %>
+        <% end %>
+        
+        <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <% if @products.nil? %>
@@ -10,15 +25,6 @@
   </div>
 
 <% else %>
-
-  <div class="row">
-    <div class="span16">
-      <%= form_tag(search_path, :method => :get) do |f| %>
-        <%= text_field_tag :q, @query, :class => "span4" %>
-        <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
-      <% end %>
-    </div>
-  </div>
 
   <%= render :partial => "listings", :locals => { :products => @products } %>
 
