@@ -1,7 +1,3 @@
-body {
-  padding-top: 60px;
-}
-
 /********* HEADER **********/
 
 
@@ -29,19 +25,12 @@ body {
   text-align: center;
 }
 
-.with_delete {
-  margin-bottom: 10px;
+.with-delete {
+
 }
 
-/********* CHECKBOXES **********/
-
-.input input[type="checkbox"] {
-  vertical-align: bottom;
-}
-
-.input label {
-  padding-top: 0;
-  float: none;
+.with-delete select {
+  display: inline-block;
 }
 
 /********* PRODUCT MAIN **********/

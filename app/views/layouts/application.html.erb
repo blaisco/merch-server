@@ -7,10 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="topbar" data-dropdown="dropdown">
-    <div class="topbar-inner">
+  <div class="navbar navbar-static">
+    <div class="navbar-inner">
       <div class="container">
-        <h3><a href="/">Video Game Merch</a></h3>
+        <a href="/" class="brand">Video Game Merch</a>
         <ul class="nav">
           <li><%= link_to "Products", products_path %></li>
           <!--<li class="active"><a href="#">Link</a></li>
@@ -18,7 +18,7 @@
           <li><a href="#">Link</a></li>-->
         </ul>
         <% if user_signed_in? %>
-          <ul class="nav secondary-nav">
+          <ul class="nav pull-right">
             <li><%= link_to "Admin", admin_path %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path %></li>
           </ul>
@@ -29,17 +29,17 @@
   <div class="container">
 
     <div class="row">
-      <div class="span16">
+      <div class="span12">
         <% if notice %>
-        <div class="alert-message success">
+        <div class="alert success">
           <a class="close" href="#">×</a>
-          <p><%= notice %></p>
+          <%= notice %>
         </div>
         <% end %>
         <% if alert %>
-        <div class="alert-message error">
+        <div class="alert error">
           <a class="close" href="#">×</a>
-          <p><%= alert %></p>
+          <%= alert %>
         </div>
         <% end %>
       </div>
@@ -50,7 +50,7 @@
     </div>
     
     <div class="row">
-      <div id="footer" class="span16">
+      <div id="footer" class="span12">
         &copy; Video Game Merch
       </div>
     </div>

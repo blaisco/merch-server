@@ -6,7 +6,7 @@
 
   window.Merch = {
     init: function() {
-      $(".alert-message").alert();
+      $(".alert").alert();
     },
     // Used on nested forms to remove an item and mark it for deletion.
     // This requires the nested item have a hidden _destroy field directly
