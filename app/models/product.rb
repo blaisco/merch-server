@@ -85,12 +85,11 @@ class Product < ActiveRecord::Base
     has product_types(:id), :as => :product_type, :facet => true
   end
   
-  # This filters things down to match our :active scope above
-  sphinx_scope(:sphinx_active) { 
-    {:with => {:status => STATUSES[:approved], :updated_at => 1.week.ago..Time.now}}
-  }
-
-  default_sphinx_scope :sphinx_active
+  #~ # This filters things down to match our :active scope above
+  #~ sphinx_scope(:sphinx_active) { 
+    #~ {:with => {:status => STATUSES[:approved], :updated_at => 1.week.ago..Time.now}}
+  #~ }
+  #~ default_sphinx_scope :sphinx_active
 
   # Return the first image, or a default image
   def primary_image

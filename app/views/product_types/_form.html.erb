@@ -1,28 +1,16 @@
 <%= errors_for(@category) %>
 
 <fieldset>
-  <div class="clearfix">
-    <%= form.label :name %>
-    <div class="input">
-      <%= form.text_field :name %>
-    </div>
-  </div>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :parent_id, "Parent Category" %>
+  <%= form.select :parent_id, options_for_select(ProductType.all.map { |cat| [cat.name, cat.id] }, @category.parent_id)%>
   
-  <div class="clearfix">
-    <%= form.label :parent_id, "Parent Category" %>
-    <div class="input">
-      <%= form.select :parent_id, options_for_select(ProductType.all.map { |cat| [cat.name, cat.id] }, @category.parent_id)%>
-    </div>
-  </div>
+  <%= form.label :rank %>
+  <%= form.text_field :rank %>
   
-  <div class="clearfix">
-    <%= form.label :rank %>
-    <div class="input">
-      <%= form.text_field :rank %>
-    </div>
-  </div>
-  
-  <div class="actions">
+  <div class="form-actions">
     <%= form.submit @category.persisted? ? "Update Category" : "Create Category", :class => "success btn" %>
   </div>
 </fieldset>

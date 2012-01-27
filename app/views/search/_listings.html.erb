@@ -2,7 +2,7 @@
   <div class="span3">
     <div class="facets">
       <div class="facet">
-      <h5>Categories</h5>
+      <h4>Categories</h4>
       <% facet_options = @facets[:product_type] %>
       <% @root.subtree.arrange(:order => :rank).each do |root, parents| %>
         <% parents.each do |parent, children| %>
@@ -33,7 +33,7 @@
         facet_options.delete(0)
         unless facet_options.empty? %>
           <div class="facet">
-            <h5><%= name %></h5>
+            <h4><%= name %></h4>
             <ul>
             <% @facet_records = facet.to_s.classify.constantize.order(:name).find_all_by_id(facet_options.keys) %>
             <% @facet_records.each do |record| %>
@@ -46,7 +46,7 @@
     </div>
   </div>
   
-  <div class="span13">
+  <div class="span9">
     <% unless @query.blank? && [:games, :franchises, :developrs, :merchants, :product_types].select{|f| params[f] }.empty? %>
       <div class="filters">
         <h4>Applied Filters</h4>

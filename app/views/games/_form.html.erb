@@ -1,28 +1,16 @@
 <%= errors_for(@game) %>
 
 <fieldset>
-  <div class="clearfix">
-    <%= form.label :name %>
-    <div class="input">
-      <%= form.text_field :name %>
-    </div>
-  </div>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
 
-  <div class="clearfix">
   <%= form.label :aliases %>
-  <div class="input">
-    <%= form.text_field :aliases %>
-    </div>
-  </div>
+  <%= form.text_field :aliases %>
 
-  <div class="clearfix">
   <%= form.label :release_date %>
-  <div class="input">
-    <%= form.text_field :release_date %>
-    </div>
-  </div>
+  <%= form.text_field :release_date %>
   
-  <div class="actions">
+  <div class="form-actions">
     <%= form.submit @game.persisted? ? "Update Game" : "Create Game", :class => "success btn" %>
   </div>
 </fieldset>

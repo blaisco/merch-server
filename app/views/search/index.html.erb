@@ -3,10 +3,10 @@
     <div class="span3">
       <h1 style="line-height: 30px;"><%= title "Search" %></h1>
     </div>
-    <div class="span13">
+    <div class="span9">
       <%# Using a real form tag to avoid getting utf8=✓ in my url %>
       <form action="<%= search_path %>" method="get">
-        <%= text_field_tag :q, @query, :class => "span6" %>
+        <%= text_field_tag :q, @query, :class => "span4" %>
         
         <% [:games, :franchises, :developers, :merchants, :product_types].each do |f| %>
           <%= hidden_field_tag f, params[f] if params[f] %>

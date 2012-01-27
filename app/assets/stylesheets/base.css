@@ -25,12 +25,13 @@
   text-align: center;
 }
 
-.with-delete {
-
-}
-
 .with-delete select {
   display: inline-block;
+}
+
+.page-header {
+  margin: 18px 0;
+  border-bottom: 1px solid #EEE;
 }
 
 /********* PRODUCT MAIN **********/
@@ -229,17 +230,17 @@ ul.listings li {
 .facets {
   background-color: #EEE;
   border: 1px solid #DDD;
-  padding: 3px;
+  padding: 5px;
 }
 
 .facet {
   margin-bottom: 20px;
 }
 
-.facet h5 {
+.facet h4 {
   border-bottom: 1px solid #DDD;
-  margin-bottom: 10px;
-  line-height: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .facet ul {
@@ -265,9 +266,13 @@ ul.listings li {
 .filters {
   background-color: #EEE;
   border: 1px solid #DDD;
-  padding: 3px;
+  padding: 5px;
   margin-bottom: 20px;
   padding-bottom: 10px;
+}
+
+.filters h4 {
+  margin-bottom: 5px;
 }
 
 .filter {
