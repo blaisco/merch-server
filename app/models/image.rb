@@ -26,8 +26,8 @@ class Image < ActiveRecord::Base
   
   has_attached_file :data, 
         :styles => { 
-          :medium => "550x>", 
-          :small => "170x135>",
-          :thumb => "70x70>" },
+          :medium => "500x>", 
+          :small => "210x150>",
+          :thumb => "80x80>" },
         :default_url => '/images/missing_:style.jpg'
 end

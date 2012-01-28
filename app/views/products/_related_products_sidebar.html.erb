@@ -1,7 +1,7 @@
 <% related_product_limit = 3 %>
 
 <div class="sidebar-inner">
-  <h5><%= (headline % link_to(has_products.name, has_products)).html_safe %></h5>
+  <h4><%= (headline % link_to(has_products.name, has_products)).html_safe %></h4>
   <div class="other-items">
     <% rp = related_products(has_products, related_product_limit, exclude) %>
     <% if rp.empty? %>

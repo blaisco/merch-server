@@ -11,7 +11,7 @@ class SearchController < ApplicationController
     @products = Product.search(terms, 
           :populate => true, 
           :page => params[:page], 
-          :per_page => 40, 
+          :per_page => 30, 
           :include => [:merchant, :images, :figures],
           :with => facets)
     #@facets = @products.facets

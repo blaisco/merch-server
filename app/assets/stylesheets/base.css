@@ -39,7 +39,7 @@
 #item-image {
   display: block;
   float: left;
-  width: 550px;
+  width: 500px;
   border: 1px solid #EEE;
   margin-bottom: 20px;
 }
@@ -57,17 +57,17 @@
 #item-thumbs {
   display: block;
   float: left;
-  width: 70px;
+  width: 80px;
   margin-left: 5px;
 }
 
 #item-thumbs .thumb {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 .thumb {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border: 1px solid #EEE;
 }
 
@@ -82,21 +82,16 @@
 }
 
 #item-summary {
+  width: 500px;
   margin-bottom: 20px;
 }
 
 /********* PRODUCT SIDEBAR **********/
 
-.price-container {
-  /*margin-bottom: 20px;*/
-}
-
 .item-price {
   font-size: 24px;
   margin-bottom: 10px;
 }
-
-.amount {}
 
 .old-amount {
   text-decoration: line-through;
@@ -104,10 +99,12 @@
   font-size: 18px;
 }
 
-.currency {}
-
 .sidebar {
   margin: 20px 0;
+}
+
+.sidebar h4 {
+  margin-bottom: 4px;
 }
 
 .sidebar-inner {
@@ -118,7 +115,7 @@
 
 .other-items {
   background-color: #FFF;
-  padding: 8px;
+  padding: 5px;
 }
 
 .other-items:after {
@@ -130,9 +127,9 @@
 .other-items .thumb {
   display: block;
   float: left;
-  margin-right: 8px;
-  width: 70px;
-  height: 70px;
+  margin-right: 6px;
+  width: 80px;
+  height: 80px;
 }
 
 .other-items .thumb {
@@ -156,39 +153,27 @@ td.indent {
 
 /********* LISTINGS **********/
 
-ul.listings {
-  list-style: none;
-  margin: 0;
-  float: left;
-  clear: left;
-}
-
-ul.listings li {
-  width: 170px;
-  background-color: #FEFEFE;
-  border: 1px solid #EEE;
-  float: left;
-  display: inline;
-  padding: 5px;
-  margin-right: 5px;
-  margin-bottom: 15px;
-}
-
 .listing-detail {
   font-size: 12px;
   line-height: 15px;
 }
 
+.listing-detail:after {
+  clear: both;
+  display: table;
+  content: "";
+}
+
 .listing-title {
   white-space: nowrap;
-	width: 170px;
+	width: 210px;
   overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 .listing-merchant {
   white-space: nowrap;
-	width: 100px;
+	width: 140px;
   overflow: hidden;
 	text-overflow: ellipsis;
   float: left;
@@ -210,8 +195,8 @@ ul.listings li {
 }
 
 .listing-image {
-  width: 170px;
-  height: 135px;
+  width: 210px;
+  height: 150px;
   margin-bottom: 5px;
 }
 

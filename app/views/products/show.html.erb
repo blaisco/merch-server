@@ -1,11 +1,11 @@
 <% description truncate(@product.description, :length => 160) %>
 
 <div class="row">
-  <div class="span11">
+  <div class="span8">
     <div id="breadcrumb"><%# breadcrumb(@product.product_type) %></div>
     <h1><%= title @product.name %><%= ' '.html_safe + link_to('(edit)', edit_product_path(@product)) if current_user %></h1>
     <div class="row">
-      <div class="span11">
+      <div class="span8">
         <div id="item-image">
           <%= link_to(
               image_tag(@image.data.url(:medium), :alt => "Main product image"), 
@@ -21,20 +21,14 @@
           <% end %>
         </div>
         
-        <div class="row">
-          <div id="item-summary" class="span9"><%= truncate(@product.description, :length => 250) %> <%= link_to("[read more]", @product.url) if @product.description.size > 250 %></div>
-        </div>
-        
-        <div class="row">
-          <div id="item-summary" class="span11">
-            <div class="fb-comments" data-href="<%= product_url(@product, :only_path => false) %>" data-num-posts="10" data-width="640"></div>
-          </div>
-        </div>
+        <div id="item-summary"><%= truncate(@product.description, :length => 250) %> <%= link_to("[read more]", @product.url) if @product.description.size > 250 %></div>
+
+        <div class="fb-comments" data-href="<%= product_url(@product, :only_path => false) %>" data-num-posts="10" data-width="590"></div>
       </div>
     </div>
   </div>
   
-  <div class="span5">
+  <div class="span4">
     <%= render :partial => "price_sidebar", :locals => {
         :product => @product } 
     %>
