@@ -29,11 +29,6 @@
   display: inline-block;
 }
 
-.page-header {
-  margin: 18px 0;
-  border-bottom: 1px solid #EEE;
-}
-
 /********* PRODUCT MAIN **********/
 
 #item-image {
@@ -213,8 +208,6 @@ td.indent {
 /********* FACETS **********/
 
 .facets {
-  background-color: #EEE;
-  border: 1px solid #DDD;
   padding: 5px;
 }
 
@@ -249,8 +242,6 @@ td.indent {
 /********* FILTERS **********/
 
 .filters {
-  background-color: #EEE;
-  border: 1px solid #DDD;
   padding: 5px;
   margin-bottom: 20px;
   padding-bottom: 10px;

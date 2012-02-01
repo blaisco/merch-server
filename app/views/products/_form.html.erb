@@ -50,8 +50,8 @@
 
 <fieldset>
   <div class="form-actions">
-    <%= form.submit @product.persisted? ? "Update & View" : "Create Product", :class => "success btn" %>
-    <%= form.submit "Update & Next Product", :name => "next", :class => "primary btn" if @product.persisted? %>
+    <%= form.submit @product.persisted? ? "Update & View" : "Create Product", :class => "btn btn-success" %>
+    <%= form.submit "Update & Next Product", :name => "next", :class => "btn btn-primary" if @product.persisted? %>
   </div>
 </fieldset>
 

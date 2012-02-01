@@ -4,7 +4,7 @@
 
 <%= form_tag(find_games_path, :method => :get) do |f| %>
   <%= text_field_tag :q, @query %>
-  <%= submit_tag "Search", :name => nil, :class => "primary btn" %>
+  <%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
 <% end %>
 
 <% if @result && @result["number_of_total_results"] > 0 %>
