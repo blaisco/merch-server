@@ -6,6 +6,7 @@ tmp/
 .sass-cache/
 config/database.yml
 config/settings.yml
+config/sphinx.yml
 config/*.sphinx.conf
 queue/config/consumer.yml
 public/system

@@ -1,0 +1,9 @@
+development:
+  mem_limit: 64M
+  morphology: stem_en
+  stopwords: "/full/path/to/stopwords.txt"
+
+production:
+  mem_limit: 64M
+  morphology: stem_en
+  stopwords: "/full/path/to/stopwords.txt"
