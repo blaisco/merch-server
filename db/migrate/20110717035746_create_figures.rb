@@ -9,5 +9,6 @@ class CreateFigures < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :products, :variation_id
   end
 end

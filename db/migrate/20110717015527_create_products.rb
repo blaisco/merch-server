@@ -1,7 +1,6 @@
 class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
-      # t.references :merchandisable, :polymorphic => true
       t.references :game
       t.references :franchise
       t.references :developer
@@ -17,9 +16,7 @@ class CreateProducts < ActiveRecord::Migration
       t.timestamps
     end
     add_index :products, :slug, :unique => true
-    add_index :products, [ :merchandisable_type, :merchandisable_id]
-    add_index :products, :merchant_id
     add_index :products, :status
-    add_index :products, :checksum
+    add_index :products, [ :status, :updated_at ]
   end
 end

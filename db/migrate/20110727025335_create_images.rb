@@ -7,7 +7,6 @@ class CreateImages < ActiveRecord::Migration
 
       t.timestamps
     end
-    
     add_index :images, :product_id
     add_index :images, :checksum
   end

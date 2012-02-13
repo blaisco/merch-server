@@ -9,5 +9,6 @@ class CreateProductTypes < ActiveRecord::Migration
     end
     
     add_index :product_types, :slug, :unique => true
+    add_index :product_types, :rank
   end
 end
