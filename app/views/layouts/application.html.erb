@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= display_meta_tags :site => 'Video Game Merch', :reverse => true %>
+  <%= display_meta_tags :site => 'Videogame Merch', :reverse => true %>
   <%# stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" %>
   <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="navbar navbar-static">
-    <div class="navbar-inner">
+  <div class="topbar">
+    <div class="topbar-inner">
       <div class="container">
-        <a href="/" class="brand">Video Game Merch</a>
-        <ul class="nav">
-          <li><%= link_to "Products", products_path %></li>
-          <!--<li class="active"><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>-->
-        </ul>
+        <%= link_to image_tag("vgm-logo-small.png", :alt => "Videogame Merch"), root_url, :class => "brand" %>
+        <%# Using a real form tag to avoid getting utf8=✓ in my url %>
+        <form action="<%= search_path %>" method="get" class="navbar-search">
+          <%= text_field_tag :q, @query, :class => "span4" %>
+          
+          <% [:games, :franchises, :developers, :merchants, :product_types].each do |f| %>
+            <%= hidden_field_tag f, params[f] if params[f] %>
+          <% end %>
+          
+          <%= submit_tag "Search", :name => nil, :class => "btn btn-success" %>
+        </form>
         <% if user_signed_in? %>
           <ul class="nav pull-right">
             <li><%= link_to "Admin", admin_path %></li>
@@ -50,7 +54,7 @@
     </div>
     
     <div id="footer">
-      <p class="pull-right"><%= link_to image_tag("whiskey-powered.png"), "http://www.giantbomb.com/" %></p>
+      <p class="pull-right"><%= link_to image_tag("whiskey-powered.png", :alt => "This site is Whiskey Powered"), "http://www.whiskeymedia.com/" %></p>
       <p>&copy; <%= link_to "Video Game Merch", root_url %></p>
     </div>
   </div>

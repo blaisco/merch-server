@@ -1,13 +1,9 @@
 class ProductsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
-
-  def index
-  	# TODO
-  end
   
   def show
-    @product = Product.unscoped.find(params[:id])
-    @image = @product.images.find_by_id(params[:image_id]) || @product.primary_image
+    @product = Product.unscoped.includes(:images, :variations, :figures).find(params[:id])
+    @primary_image = @product.images.find_by_id(params[:image_id]) || @product.primary_image
   end
   
   def new

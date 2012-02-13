@@ -1,28 +1,8 @@
-<div class="page-header">
-  <div class="row">
-    <div class="span3">
-      <h1 style="line-height: 30px;"><%= title "Search" %></h1>
-    </div>
-    <div class="span9">
-      <%# Using a real form tag to avoid getting utf8=✓ in my url %>
-      <form action="<%= search_path %>" method="get">
-        <%= text_field_tag :q, @query, :class => "span4" %>
-        
-        <% [:games, :franchises, :developers, :merchants, :product_types].each do |f| %>
-          <%= hidden_field_tag f, params[f] if params[f] %>
-        <% end %>
-        
-        <%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
-      </form>
-    </div>
-  </div>
-</div>
-
 <% if @products.nil? %>
 
-  <div class="alert-message block-message error">
-  <p><strong>Sorry!</strong></p>
-    <p>Searching is temporarily offline.</p>
+  <div class="alert alert-error">
+    <h4 class="alert-heading">Sorry!</h4>
+    Searching is temporarily offline.
   </div>
 
 <% else %>

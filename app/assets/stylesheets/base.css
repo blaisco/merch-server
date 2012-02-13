@@ -1,5 +1,69 @@
 /********* HEADER **********/
 
+.topbar {
+  overflow: visible;
+  margin-bottom: 18px;
+}
+
+.topbar-inner {
+  background: none;
+  background-color: #F8F8F8;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.topbar .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 12px 10px 12px 0;
+}
+
+.topbar .nav > li {
+  display: block;
+  float: left;
+}
+
+.topbar .nav.pull-right {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.topbar .nav.pull-right {
+  float: right;
+}
+
+.topbar .brand {
+  float: left;
+  display: block;
+  padding: 8px 20px;
+  margin-left: -20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #999;
+}
+
+.topbar .brand img {
+  vertical-align: middle;
+  height: 50px;
+  margin-right: 5px;
+}
+
+.topbar .nav > li {
+  vertical-align: middle;
+}
+
+.topbar .nav > li > a {
+  float: none;
+  padding: 10px 10px 11px;
+  line-height: 19px;
+  color: #999;
+  text-decoration: none;
+}
+
+.topbar .navbar-search {
+  padding: 13px 0 10px 0;
+}
 
 
 /********* FOOTER **********/
@@ -27,6 +91,24 @@
 
 .with-delete select {
   display: inline-block;
+}
+
+/********* FRONT PAGE **********/
+
+#frontpage-container {
+  margin: 150px 0;
+  text-align: center;
+}
+
+#frontpage-search {
+  margin: 40px 0 30px;
+}
+
+#frontpage-tagline {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: normal;
+  color: #666;
 }
 
 /********* PRODUCT MAIN **********/

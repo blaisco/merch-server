@@ -40,12 +40,13 @@ Merch::Application.routes.draw do
   
   match '/search' => 'search#index'
   
+  root :to => 'welcome#index'
+  
   resources :products, :path => '/'
   # match '/:id' => 'products#show', :as => 'short_product', :via => 'get'
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'products#index'
 
   # See how all your routes lay out with "rake routes"
 end

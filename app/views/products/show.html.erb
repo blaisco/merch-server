@@ -9,8 +9,8 @@
       <div class="span8">
         <div id="item-image">
           <%= link_to(
-              image_tag(@image.data.url(:medium), :alt => "Main product image"), 
-            @image.data.url) %>
+              image_tag(@primary_image.data.url(:medium), :alt => "Main product image"), 
+            @primary_image.data.url) %>
         </div>
         <div id="item-thumbs">
           <% if @product.images.size > 1 %>
@@ -22,7 +22,7 @@
           <% end %>
         </div>
         
-        <div id="item-summary"><%= truncate(@product.description, :length => 250) %> <%= link_to("[read more]", @product.url) if @product.description.size > 250 %></div>
+        <div id="item-summary"><%= @product.description %> <%= link_to("[read more]", @product.url) if @product.description.size > 250 %></div>
 
         <div class="fb-comments" data-href="<%= product_url(@product, :only_path => false) %>" data-num-posts="10" data-width="590"></div>
       </div>

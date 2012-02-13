@@ -1,0 +1,42 @@
+<% title "Video Game Merch | Shirts, Clothing, Figures, Posters, and more" %>
+<% description "Search Engine For Video Game Merchandise. Search For Shirts, Clothing, Figures, Toys, Posters, And More From Your Favorite Games." %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <%= display_meta_tags :site => 'Videogame Merch', :reverse => true %>
+  <%# stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" %>
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container row">
+    <div class="span12 offset0">
+      <div id="frontpage-container">
+        <%= image_tag "vgm-logo.png", :alt => "Videogame Merch", :id => "frontpage-logo" %>
+        
+        <div id="frontpage-search">
+          <form action="<%= search_path %>" method="get">
+            <%= text_field_tag :q, @query, :class => "span6" %>
+            <%= submit_tag "Search", :name => nil, :class => "btn btn-success" %>
+          </form>
+        </div>
+        
+        <h1 id="frontpage-tagline">The videogame merchandise search engine</h1>
+      </div>
+      
+      <div id="footer">
+        <p class="pull-right"><%= link_to image_tag("whiskey-powered.png", :alt => "This site is Whiskey Powered"), "http://www.whiskeymedia.com/" %></p>
+        <p>&copy; Video Game Merch</p>
+      </div>
+    </div>
+  </div>
+  
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
+  <script>
+    $(function() {
+      $("#q").focus();
+    });
+  </script>
+</body>
+</html>
