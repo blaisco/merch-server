@@ -10,3 +10,4 @@ config/sphinx.yml
 config/*.sphinx.conf
 queue/config/consumer.yml
 public/system
+public/products

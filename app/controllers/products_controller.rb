@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  caches_page :show, :expires_in => 12.hours, :race_condition_ttl => 30.seconds
+  before_filter :authenticate_user!, :except => [:show]
   
   def show
     @product = Product.unscoped.includes(:images, :variations, :figures).find(params[:id])
@@ -30,6 +31,7 @@ class ProductsController < ApplicationController
     @product = Product.unscoped.find(params[:id])
    
     if @product.update_attributes(params[:product])
+      expire_page :action => "show", :id => params[:id]
       if params[:next].blank?
         redirect_to(@product, :notice => 'Product was successfully updated.')
       else

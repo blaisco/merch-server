@@ -40,9 +40,12 @@ Merch::Application.routes.draw do
   
   match '/search' => 'search#index'
   
+  resources :products
+  
   root :to => 'welcome#index'
   
-  resources :products, :path => '/'
+  #resources :products, :path => '/'
+  
   # match '/:id' => 'products#show', :as => 'short_product', :via => 'get'
 
   # You can have the root of your site routed with "root"
