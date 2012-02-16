@@ -74,7 +74,12 @@
   </div>
 </div>
 
-<%= content_for :footer do %>
+<%
+  # Including these JS files here because this action is going to get cached and
+  # we cant pass the actions javascript back to the layout. Hacky, but it works.
+%>
+<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
+<%= javascript_include_tag "application" %>
 
 <%# Facebook social plugin code %>
 <div id="fb-root"></div>
@@ -102,4 +107,3 @@
     });
   });
 </script>
-<% end %>

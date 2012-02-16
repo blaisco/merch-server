@@ -21,9 +21,7 @@
           
           <%= submit_tag "Search", :name => nil, :class => "btn btn-success" %>
         </form>
-        <%# Cant display anything personalized here becasue it will get cached on the product page %>
-        <%# if user_signed_in? %>
-        <% if false %>
+        <% if user_signed_in? %>
           <ul class="nav pull-right">
             <li><%= link_to "Admin", admin_path %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path %></li>
@@ -38,7 +36,7 @@
       <div class="span12">
         <% if notice %>
         <div class="alert success">
-          <a class="close" href="#">×</a>
+          <a class="close" data-dismiss="alert" href="#">×</a>
           <%= notice %>
         </div>
         <% end %>

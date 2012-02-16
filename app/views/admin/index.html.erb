@@ -14,7 +14,7 @@
     <p><%= Product.approved.count %> <%= link_to "approved products", products_path %></p>
     <p><%= count = Product.pending.count %> <%= count > 0 ? link_to("pending", edit_product_path(Product.pending.first)) : "pending" %></p>
     <p><%= Product.stale.count %> stale</p>
-    <p><%= Product.denied.count %> inactive</p>
+    <p><%= Product.denied.count %> denied</p>
   </div>
   
   <div class="span4">

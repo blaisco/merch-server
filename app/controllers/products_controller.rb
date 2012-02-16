@@ -4,8 +4,7 @@ class ProductsController < ApplicationController
   caches_action :show, 
     :expires_in => 12.hours, 
     :race_condition_ttl => 30.seconds, 
-    # Can't do layout => false because of how we're handling javascript includes
-    # :layout => false, 
+    :layout => false, 
     :cache_path => Proc.new { |c| c.params.delete_if { |k,v| !["image_id","id"].include?(k) } }
     
   def show
