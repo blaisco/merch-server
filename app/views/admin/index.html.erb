@@ -2,19 +2,31 @@
   <h1><%= title "Admin" %></h1>
 </div>
 
-<%= link_to "Find and add game", find_games_path %>
+<div class="row">
 
-<p><%= Search.count %> searches (<%= @search_count_today %> today)</p>
+  <div class="span4">
+    <p><%= link_to "Find and add game", find_games_path %></p>
+    <p><%= Search.count %> searches (<%= @search_count_today %> today)</p>
+  </div>
 
-<p><%= Product.active.count %> <%= link_to "active products", products_path %> 
-  (<%= count = Product.pending.count %> <%= count > 0 ? link_to("pending", edit_product_path(Product.pending.first)) : "pending" %>,
-  <%= Product.stale.count %> stale, <%= Product.inactive.count %> inactive)
-</p>
+  <div class="span4">
+    <h3>Products</h3>
+    <p><%= Product.approved.count %> <%= link_to "approved products", products_path %></p>
+    <p><%= count = Product.pending.count %> <%= count > 0 ? link_to("pending", edit_product_path(Product.pending.first)) : "pending" %></p>
+    <p><%= Product.stale.count %> stale</p>
+    <p><%= Product.denied.count %> inactive</p>
+  </div>
+  
+  <div class="span4">
+    <h3>Other Stuff</h3>
+    <p><%= ProductType.count %> <%= link_to "product types", product_types_path %></p>
+    <p><%= Game.count %> <%= link_to "games", games_path %></p>
+    <p><%= Developer.count %> <%= link_to "developers", developers_path %></p>
+    <p><%= Merchant.count %> <%= link_to "merchants", merchants_path %></p>
+  </div>
 
-<p><%= ProductType.count %> <%= link_to "product types", product_types_path %></p>
+</div>
 
-<p><%= Game.count %> <%= link_to "games", games_path %></p>
 
-<p><%= Developer.count %> <%= link_to "developers", developers_path %></p>
 
-<p><%= Merchant.count %> <%= link_to "merchants", merchants_path %></p>
+

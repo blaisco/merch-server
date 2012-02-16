@@ -1,7 +1,7 @@
 <%= errors_for(@product) %>
 
 <div class="row">
-  <div class="span8">
+  <div class="span7">
     <fieldset>
       <label>Name</label>
       <span class="uneditable-input" style="width: 460px;"><%= @product.name %></span>
@@ -17,33 +17,37 @@
       
       <br />
       
-      <%= form.label :merchandisable_string, "Game/Dev/Series" %>
-      <%= form.select :merchandisable_string, merchandisable_grouped_options(@product.merchandisable), {:prompt => true} %>
+      <div class="well">
       
-      <%= form.label :product_types, "Product Types" %>
-      <div id="typifications">
-        <% @product.typifications.each_with_index do |typification, index| %>
-          <%= render "typification_fields", :form => form, :typification => typification, :index => index %>
+        <%= form.label :merchandisable_string, "Game/Dev/Series" %>
+        <%= form.select :merchandisable_string, merchandisable_grouped_options(@product.merchandisable), {:prompt => true} %>
+        
+        <%= form.label :product_types, "Product Types" %>
+        <div id="typifications">
+          <% @product.typifications.each_with_index do |typification, index| %>
+            <%= render "typification_fields", :form => form, :typification => typification, :index => index %>
+          <% end %>
+        </div>
+        <div class="input action">
+          <%= add_child_object_link(form, @product, :typification, "Product Type") %>
+        </div>
+        
+        <br />
+        
+        <%= form.label :status %>
+        <% indicators = { "approved" => "label-success", "denied" => "label-important", "pending" => "", "stale" => "label-info"} %>
+        <% Product::STATUSES.each do |status, value| %>
+          <label class="radio">
+            <%= form.radio_button :status, value, { :checked => @product.status == value } %>
+            <span class="label <%= indicators[status.to_s] %>"><%= status.to_s %></span>
+          </label>
         <% end %>
-      </div>
-      <div class="input action">
-        <%= add_child_object_link(form, @product, :typification, "Product Type") %>
-      </div>
       
-      <br />
-      
-      <%= form.label :status %>
-      <% Product::STATUSES.each do |status, value| %>
-        <label class="radio">
-          <%= form.radio_button :status, value, { :checked => @product.status == value } %>
-          <% indicators = { "approved" => "success", "denied" => "important", "pending" => ""} %>
-          <span class="label <%= indicators[status.to_s] %>"><%= status.to_s %></span>
-        </label>
-      <% end %>
+      </div>
     </fieldset>
   </div>
-  <div class="span4">
-    <%= image_tag(@product.primary_image.data(:small), :alt => @product.name, :class => "pull-right") %>
+  <div class="span5">
+    <%= image_tag(@product.primary_image.data(:medium), :alt => @product.name, :class => "pull-right") %>
   </div>
 </div>
 

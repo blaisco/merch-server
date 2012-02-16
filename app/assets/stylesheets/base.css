@@ -81,6 +81,11 @@
   height: auto;
 }
 
+/* Font size seems to be a bit off without this */
+.label {
+  font-size: 9px;
+}
+
 /********* GENERAL **********/
 
 .center {

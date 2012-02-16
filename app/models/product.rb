@@ -27,18 +27,18 @@
 
 class Product < ActiveRecord::Base
   STATUSES = { 
-    :approved => 1,   # product displayed to users
+    :approved => 1, # product displayed to users
     :pending => 2,  # new product; needs review
-    :denied => 3  # product not displayed (ignored)
+    :denied => 3,   # product not displayed (ignored)
+    :stale => 4,    # product hasn't seen updates in 1+ week
   }
   
-  scope :active, where("status = ? AND updated_at >= ?", STATUSES[:approved], 1.week.ago)
-  scope :stale, where("status = ? AND updated_at < ?", STATUSES[:approved], 1.week.ago)
-  scope :inactive, where(:status => STATUSES[:denied])
-  scope :pending, where(:status => STATUSES[:pending])
+  STATUSES.each do |status, value|
+    scope status, where(:status => value)
+  end
   
   # Use 'unscoped' (before any other sql methods) to override
-  #default_scope where("status = ? AND updated_at >= ?", :active, 1.week.ago)
+  #default_scope where(:status => STATUSES[:approved])
 
   #belongs_to :merchandisable, :polymorphic => true
   belongs_to :game
@@ -85,11 +85,11 @@ class Product < ActiveRecord::Base
     has product_types(:id), :as => :product_type, :facet => true
   end
   
-  #~ # This filters things down to match our :active scope above
-  #~ sphinx_scope(:sphinx_active) { 
-    #~ {:with => {:status => STATUSES[:approved], :updated_at => 1.week.ago..Time.now}}
+  #~ # This filters things down to match our :approved scope above
+  #~ sphinx_scope(:sphinx_approved) { 
+    #~ {:with => {:status => STATUSES[:approved]}}
   #~ }
-  #~ default_sphinx_scope :sphinx_active
+  #~ default_sphinx_scope :sphinx_approved
 
   # Return the first image, or a default image
   def primary_image
