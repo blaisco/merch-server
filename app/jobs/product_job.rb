@@ -31,7 +31,6 @@ class ProductJob
     #~ \"description\": \"This strictly limited collector\\u0092s [snip]"\"
   #~ }"
 
-
   def self.perform(object)
     product = Product.find_or_initialize_by_url(object["url"])
     if product.status != Product::STATUSES[:denied] # active, stale, or pending products
@@ -46,7 +45,14 @@ class ProductJob
       # Mark as updated even if no changes; I want to know when a product is
       # stale (i.e. no one is trying to update it).
       product.updated_at = Time.now
-      product.save!
+      product.create_by_api = true
+      # Logging failed validations since we don't see them in the server logs
+      unless product.save
+        logfile = File.new('log/api.log', 'a')    
+        audit_log = AuditLogger.new(logfile)
+        audit_log.error object.to_s + " | " + product.errors.full_messages.join(", ") 
+      end
+      product
     end
   end
   
@@ -71,10 +77,12 @@ class ProductJob
       var.size = inv['size']
       var.color = inv['color']
       var.in_stock = inv['in_stock']
-      fig = var.build_figure
-      fig.currency = inv['currency']
-      fig.price_in_cents = inv['price'].to_i
-      fig.amount_saved_in_cents = inv['amount_saved'].to_i
+      if var.in_stock
+        fig = var.build_figure
+        fig.currency = inv['currency']
+        fig.price_in_cents = inv['price'].to_i
+        fig.amount_saved_in_cents = inv['amount_saved'].to_i
+      end
     end
     
     product

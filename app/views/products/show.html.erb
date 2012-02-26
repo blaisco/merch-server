@@ -22,7 +22,7 @@
           <% end %>
         </div>
         
-        <div id="item-summary"><%= @product.description %> <%= link_to("[read more]", @product.url) if @product.description.size > 250 %></div>
+        <div id="item-summary"><%= @product.description %></div>
 
         <div class="fb-comments" data-href="<%= product_url(@product, :only_path => false) %>" data-num-posts="10" data-width="590"></div>
       </div>

@@ -1,18 +1,22 @@
 <div class="price-container">
   <div class="item-price">
-    <% if product.price_range? %>
-      <span class='amount'><%= product.min_figure.price.format %> - <%= product.max_figure.price.format %></span>
+    <% if product.figures.empty? %>
+      SOLD OUT :-(
     <% else %>
-      <span class='amount'><%= product.max_figure.price.format %></span>
-    <% end %>
-    
-    <span class='currency'><%= product.max_figure.currency %></span>
-    
-    <% if product.price_range? %>
-      <%# TODO: Display amount saved for price range %>
-    <% else %>
-      <% if product.max_figure.amount_saved > 0 %>
-        <span class='old-amount'>was <%= (product.max_figure.price + product.max_figure.amount_saved).format %></span>
+      <% if product.price_range? %>
+        <span class='amount'><%= product.min_figure.price.format %> - <%= product.max_figure.price.format %></span>
+      <% else %>
+        <span class='amount'><%= product.max_figure.price.format %></span>
+      <% end %>
+      
+      <span class='currency'><%= product.max_figure.currency %></span>
+      
+      <% if product.price_range? %>
+        <%# TODO: Display amount saved for price range %>
+      <% else %>
+        <% if product.max_figure.amount_saved > 0 %>
+          <span class='old-amount'>was <%= (product.max_figure.price + product.max_figure.amount_saved).format %></span>
+        <% end %>
       <% end %>
     <% end %>
   </div>

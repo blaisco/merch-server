@@ -58,13 +58,13 @@ class Product < ActiveRecord::Base
   
   validates_inclusion_of :status, :in => STATUSES.values,
             :message => "must be in #{STATUSES.keys * ', '}"
-  validates :merchandisable_string, :presence => true, :on => :update
-  validates :typifications, :presence => true, :on => :update
+  validates :merchandisable_string, :presence => true, :unless => :create_by_api
+  validates :typifications, :presence => true, :unless => :create_by_api
             
   before_validation :set_pending_status
   before_save :set_merchandisable
   
-  attr_accessor :merchandisable_string
+  attr_accessor :merchandisable_string, :create_by_api
   attr_accessible :merchant_id, :merchandisable_string, :status, :typifications_attributes
   
   define_index do
@@ -110,6 +110,11 @@ class Product < ActiveRecord::Base
   
   def merchandisable
     @merchandisable ||= game || franchise || developer
+  end
+  
+  # avoid doing some callbacks if we're creating/updating a product by api
+  def create_by_api
+    @create_by_api ||= false
   end
   
   private
