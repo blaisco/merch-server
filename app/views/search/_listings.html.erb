@@ -88,8 +88,12 @@
               <div class="listing-title"><%= link_to product.name, product %></div>
               <div class="listing-merchant"><%= link_to product.merchant.name, product.merchant %></div>
               <div class="listing-price">
+                <% if product.figures.empty? %>
+                  SOLD OUT
+                <% else %>
                 <span class="listing-amount"><%= product.max_figure.price.format %></span>
                 <span class="listing-currency"><%= product.max_figure.price.currency %></span>
+                <% end %>
               </div>
             </div>
           </div>
